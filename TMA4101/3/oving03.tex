@@ -1,0 +1,170 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 3 - Følger, rekker og numeriske likningsløsere II}
+\author{8. september kl 1400}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{E1}
+Vis at rekken
+\[
+\sum_{n=1}^\infty \frac{(-3x)^n}{n}
+\]
+konvergerer dersom $-\frac{1}{3} < x \leq \frac{1}{3}$.
+\end{oppgave}
+
+
+\begin{oppgave}{E2}
+Lag en pythonfunksjon som tar inn $x$ og $N$, 
+og evaluerer den $N$-te partialsummen til rekken
+\[
+f(x)=2\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n}\sin nx.
+\]
+Kjør koden din for forskjellige verdier av $x \in [-\pi,\pi]$, og $N=100000$. 
+Kan du si noe om $f$?
+\end{oppgave}
+
+
+
+
+\section*{Anbefalte oppgaver}
+
+  Avgjør om følgende rekker konvergerer eller divergerer.
+
+
+\begin{oppgave}{C1}
+    $\quad\displaystyle \sum_{n = 1}^\infty \frac{\sin n}{n^2 + 1}$
+\end{oppgave}
+
+\begin{oppgave}{B2}
+    $\quad\displaystyle \sum_{n = 0}^\infty \left(\frac\pi2 - \arctan
+      n\right)$
+\end{oppgave}
+\begin{oppgave}{D3}
+    $\quad\displaystyle \sum_{n = 0}^\infty \frac{(-1)^n (n^2 - 1)}{n^2 +1}$
+\end{oppgave}
+\begin{oppgave}{D4}
+    $\quad\displaystyle \sum_{n = 1}^\infty \frac{(-1)^n}{\sqrt n}$
+\end{oppgave}
+\begin{oppgave}{C5}
+    $\quad\displaystyle \sum_{n=1}^{\infty} \sqrt{n+1}-\sqrt{n}$
+\end{oppgave}
+
+\section*{Relevante eksamensoppgaver fra TMA4100}
+
+\begin{oppgave}{C}
+2019H oppgave 9
+\end{oppgave}
+
+\begin{oppgave}{B}
+2019K oppgave 7
+\end{oppgave}
+
+\begin{oppgave}{B}
+2018H oppgave 7
+\end{oppgave}
+
+\begin{oppgave}{C}
+2018K oppgave 6
+\end{oppgave}
+
+\begin{oppgave}{B}
+2017H oppgave 6
+\end{oppgave}
+
+\begin{oppgave}{A}
+2001H oppgave 5
+\end{oppgave}
+
+\begin{oppgave}{C}
+2001K oppgave 5
+\end{oppgave}
+
+\begin{oppgave}{C}
+1999H oppgave 1
+\end{oppgave}
+
+\begin{oppgave}{B}
+1999H oppgave 4
+\end{oppgave}
+
+\begin{oppgave}{B}
+1999H oppgave 7 \\
+(Hint: konvergensradien i obligatorisk oppgave E2 er $\frac{1}{3}$.)
+\end{oppgave}
+
+
+
+
+
+
+\section*{Vanskelige oppgaver}
+
+\begin{oppgave}{1}
+Bevis sammenlikningstesten. 
+\end{oppgave}
+
+\begin{oppgave}{2}
+Bevis forholdstesten. (Hint: Bruk sammenlikningstesten og en passende geometrisk rekke.)
+\end{oppgave}
+%
+%\begin{oppgave}{3}
+%Følgende test kalles rot-testen. 
+%La $f$ være en positive følge, og la
+%\[
+%\rho=\lim_{n\to \infty}\sqrt[n]{f(n)}.
+%\]
+%Dersom $\rho >1$ er $\sum f$ divergent. 
+%Dersom $\rho <1$ er $\sum f$ konvergent. 
+%Dersom $\rho =1$ gir testen ingen informasjon.
+%
+%Bevis rottesten. (Hint: Beviset er likner veldig på beviset for forholdstesten.)
+%\end{oppgave}
+
+
+%\begin{oppgave}{3}
+%Vis at 
+%\[
+%\exp{(x+y)}=\exp{x}\exp{y}.
+%\]
+%\end{oppgave}
+
+\end{document}

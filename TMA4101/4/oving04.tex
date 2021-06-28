@@ -1,0 +1,155 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+\usepackage[american]{circuitikz}
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 4 - Funksjoner på $\mathbb{R}$}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{E1}
+I en tidligere øving summerte vi spenningsfallet over en krets, 
+og fikk likningen 
+\[
+2=v+\exp{v}.
+\]
+Vis at denne likningen har entydig løsning $x \geq 0$.
+\end{oppgave}
+
+\begin{oppgave}{E2}
+Bestem konstantene $a$, $b$ og $c$ slik at funksjonen
+\[
+f(x)=
+\begin{cases}
+0 \quad &x<1 \\
+ax^2+bx+c \quad &1\leq x \leq 2\\
+1 \quad &x  >2
+\end{cases}
+\]
+blir kontinuerlig i $x=2$ og kontinuerlig deriverbar i $x=1$.
+Skisser $f$ og $f'$.
+\end{oppgave}
+
+
+
+
+\section*{Anbefalte oppgaver}
+
+
+
+\begin{oppgave}{B1}
+La $f: [0,\infty)\to \mathbb{R}$ være gitt ved $f(x)=x+\exp{x}$. 
+Avgjør om $f^{-1}$ eksisterer, 
+og finn $f^{-1}$ dersom dette er mulig.
+\end{oppgave}
+
+\begin{oppgave}{A2}
+Vis at eksponensialfunksjonen er positiv overalt.
+\end{oppgave}
+
+\begin{oppgave}{C3}
+Vis at likningen $2=v+\exp{v}$ har entydig løsning $x \in \mathbb{R}$.
+(Hint: bruk forrige oppgave.)
+\end{oppgave}
+
+\begin{oppgave}{C4}
+La $f: \mathbb{R} \to \mathbb{R}$ være gitt ved $f(t)=|2+t^3|$.  Finn ut hvor $f'$ eksisterer, og bestem uttrykket for $f'(x)$. 
+\end{oppgave}
+
+\begin{oppgave}{C5}
+La $f: \mathbb{R} \to \mathbb{R}$ være gitt ved $f(t)=\frac{1}{1+x^2}$.  Finn ut hvor $f$ er avtagende og hvor $f$ er  økende.
+\end{oppgave}
+
+
+\begin{oppgave}{B6}
+Finn tangentlinjen til sirkelen med likning $x^2+y^2=5$ i punktet $x=1$, $y=2$. 
+\end{oppgave}
+
+
+\section*{Relevante eksamensoppgaver fra TMA4100}
+
+\begin{oppgave}{C}
+2020K oppgave 3
+\end{oppgave}
+
+\begin{oppgave}{B}
+2019H oppgave 4
+\end{oppgave}
+
+\begin{oppgave}{A}
+2019H oppgave 10
+\end{oppgave}
+
+\begin{oppgave}{D}
+2019K oppgave 1
+\end{oppgave}
+
+\begin{oppgave}{B}
+2019K oppgave 9
+\end{oppgave}
+
+\begin{oppgave}{D}
+2018H oppgave 1
+\end{oppgave}
+
+\begin{oppgave}{B}
+2018H oppgave 5
+\end{oppgave}
+
+
+\begin{oppgave}{D}
+2000H oppgave 5
+\end{oppgave}
+
+\begin{oppgave}{A}
+2000H oppgave 007
+\end{oppgave}
+
+\begin{oppgave}{C}
+1999H oppgave 2
+\end{oppgave}
+
+\begin{oppgave}{C}
+1999H oppgave 3a) \\
+(Oppgave b) skal vi lære å løse senere i semesteret.)
+\end{oppgave}
+
+%\section*{Vanskelige oppgaver}
+
+\end{document}

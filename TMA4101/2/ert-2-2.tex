@@ -1,0 +1,167 @@
+\input{../preamble.tex}
+
+\title{Lineær uavhengighet}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+I denne øvingen skal vi bli kjent med et av de viktigste begrepene i lineæralgebra.
+
+\begin{tcolorbox}
+Vi sier at vektorer $\V v_1$, $\V v_2$ ... $\V v_n$ er lineært uavhengige dersom
+\[
+c_1\V v_1+c_2\V v_2 +\cdots +c_n\V v_n=\V 0
+\]
+impliserer 
+at
+\[
+c_1=c_2=\cdots=c_n= 0.
+\]
+\end{tcolorbox}
+
+
+
+\section*{Standardoppgaver}
+
+\begin{oppgave}{S1}
+Forklar hvorfor 
+\[
+x_1
+\begin{bmatrix}
+1\\
+2\\
+3\\
+4
+\end{bmatrix}
++
+x_2
+\begin{bmatrix}
+2\\
+3\\
+4\\
+5
+\end{bmatrix}
++
+x_3
+\begin{bmatrix}
+3\\
+4\\
+5\\
+6
+\end{bmatrix}
+=
+\begin{bmatrix}
+-3\\
+-7\\
+-3\\
+0
+\end{bmatrix}
+\]
+og 
+\[
+\begin{amatrix}{3}
+1&2&3&-3\\
+2&3&4&-7\\
+3&4&5&-3\\
+4&5&6&0
+\end{amatrix}
+\]
+beskriver de samme likningene.
+\end{oppgave}
+
+
+Vi har så vidt sett at dersom systemet ikke er kvadratisk, 
+kan man ikke avgjøre spørsmålet om entydighet ved å beregne determinant. 
+
+\begin{oppgave}{S2}
+Løs likningssystemet
+\[
+\begin{amatrix}{3}
+1&2&3&-3\\
+2&3&4&-7\\
+3&4&5&-3\\
+4&5&6&0
+\end{amatrix}
+\]
+\end{oppgave}
+
+
+\begin{oppgave}{S3}
+Løs likningssystemet
+\[
+\begin{amatrix}{3}
+8&-7&0&-3\\
+-8&-7&3&-7\\
+-4&5&-8&-3\\
+-6&6&-4&0
+\end{amatrix}
+\]
+\end{oppgave}
+
+Dersom man skal skjønne forskjellen på de to systemene over, 
+er lineær uavhengighet det riktige rammeverket å bruke. 
+Dette er mer anvendelig konsept enn determinanter, 
+og vi skal få bruk for det mange ganger dette studieåret.
+
+\begin{oppgave}{S4}
+Løs likningssystemet
+\[
+\begin{amatrix}{3}
+1&2&3&0\\
+2&3&4&0\\
+3&4&5&0\\
+4&5&6&0
+\end{amatrix}
+\]
+\end{oppgave}
+
+
+\begin{oppgave}{S5}
+Løs likningssystemet
+\[
+\begin{amatrix}{3}
+8&-7&0&0\\
+-8&-7&3&0\\
+-4&5&-8&0\\
+-6&6&-4&0
+\end{amatrix}
+\]
+\end{oppgave}
+
+
+\section*{Viderekomne oppgaver}
+
+
+\begin{oppgave}{V1}
+Kan en lineært uavhengig vektormengde inneholde nullvektoren?
+\end{oppgave}
+
+\begin{oppgave}{V2}
+La 
+\begin{align*}
+p(x)&=8x^3-8x^2-4x-6 \\
+q(x)&=-7x^3-7x^2+5x+6 \\
+r(x)&=3x^2-8x-4 
+\end{align*}
+Finnes det konstanter $a$, $b$ og $c$ slik at 
+\[
+a\cdot p(x)+b\cdot q(x)+c\cdot r(x)=-3x^3-7x^2-3x?
+\]
+\end{oppgave}
+
+\begin{oppgave}{V3}
+La 
+\begin{align*}
+p(x)&=-6x^3-4x^2-8x+8 \\
+q(x)&=6x^3+5x^2-7x-7 \\
+r(x)&=-4x^3-8x^2+3x
+\end{align*}
+Finnes det konstanter $a$, $b$ og $c$ slik at 
+\[
+a\cdot p(x)+b\cdot q(x)+c\cdot r(x)=-3x^2-7x-3?
+\]
+\end{oppgave}
+
+\end{document}

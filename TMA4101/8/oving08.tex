@@ -1,0 +1,215 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 8 - Integralet}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{E1}
+Funksjonen $f(x)=\exp{-x^2}$ er riemannintegrerbar, 
+men har ingen antiderivert som kan skrives ved et endelig antall elementære funksjoner.
+Lag et pythonscript som beregner en tilnærming til 
+ \[
+\int_0^1\exp{(-x^2)}\;dx=0.7468241328...
+ \]
+ ved  
+  \bPunkt
+  riemannsummer.  
+   \ePunkt
+   
+     \bPunkt
+ trapesmetoden. 
+   \ePunkt
+   
+ Hvor mange riktige desimaler klarer du å få til med hver metode?
+\end{oppgave}
+
+\setcounter{Punkt}{0}
+
+\begin{oppgave}{E2}
+ Regn ut for alle $r\in \mathbb R$
+  
+  % a)
+  \bPunkt
+    $\displaystyle\int_0^1 x^{-r} \dee x$
+  \ePunkt
+
+  % b)
+  \bPunkt
+    $\displaystyle\int_1^\infty x^{-r} \dee x$.
+  \ePunkt
+\end{oppgave}
+
+
+
+%\begin{oppgave}{E2}
+%Funksjonen $f(x)=\frac{\log \cos x}{\sin 2x}$ er riemannintegrerbar, 
+%og har en antiderivert, men denne tar rundt en A4-side å skrive opp. 
+%Lag et script som beregner en tilnærming til 
+% \[
+%\int_0^1\frac{\log \cos x}{\sin 2x}\;dx=0.7468241328...
+% \]
+% ved trapesmetoden.
+%\end{oppgave}
+
+
+
+\section*{Anbefalte oppgaver}
+
+\begin{oppgave}{B1}
+  Finn en funksjon $f$ slik at
+  \begin{equation*}
+    \frac{1}{n^2} \sum_{k=1}^n k e^{- \frac{k^2}{n^2}}
+  \end{equation*}
+  er en Riemannsum for $f$ på intervallet $[0,1]$. Bruke dette til å
+  bestemme grenseverdien
+  \begin{equation*}
+    \lim_{n \to \infty} \frac{1}{n^2} \sum_{k=1}^n k e^{-
+      \frac{k^2}{n^2}}.
+  \end{equation*}
+\end{oppgave}
+
+\begin{oppgave}{D2}
+  Finn gjennomsnittsverdien av funksjonen $f(x) = |x+1| (u(x)-u(-x))$,  
+  på intervallet $[-2,2]$, der  $u$ er heavisidefunksjonen.
+  
+%  
+%   \begin{equation*}
+%u(x)-u(-x) = \begin{cases} 
+%      1 & x \geq 0 \\
+%      -1 & x < 0 \\
+%            0 & x = 0 
+%    \end{cases}
+%  \end{equation*}
+\end{oppgave} 
+
+\begin{oppgave}{C3}
+  La
+  \begin{equation*}
+    F(t) = \int_0^t \cos(x^2) \dee x,
+  \end{equation*}
+  og finn $\frac{\dee}{\dee x} F(\sqrt{x})$.
+\end{oppgave}
+
+\begin{oppgave}{A4}
+  Regn ut integralene
+  \begin{equation*}
+    (i) \quad \int_0^{\frac{\pi}{2}} \sqrt{1 + \cos x} \dee x \qquad
+    \qquad (ii) \quad \int\frac{\sin\left( x \right)}{1+\cos\left( x
+      \right)} \dee x.
+  \end{equation*}
+  (Hint: $\cos(2\theta) = 2\cos^2 \theta -1 = 1 - 2 \sin^2 \theta$.)
+\end{oppgave}
+
+\begin{oppgave}{B5}
+  Finn området avgrenset av den lukkede kurven
+  $y^{2}=x^{4}\left( 2+x \right)$ til venstre for $y$-aksen.
+\end{oppgave}
+
+
+\begin{oppgave}{C6}
+  Regn ut 
+  \begin{equation*}
+    \lim_{n\to \infty} \sum_{i=1}^n \frac{2n+3i}{n^2}.
+  \end{equation*}
+  \\[-6pt]\\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{A7}
+  Oppgave 5.3.8 fra Adams.\\
+  La $P_n$ være en uniform partisjon av intervallet
+  $\left[ 0,2 \right]$ hvor inkrementene har lengde $2/n.$ Regn ut
+  $L\left( f,P_n \right)$ og $U\left( f,P_n \right)$ for funksjonen
+  $f\left( x \right)=1-x$ på intervallet $\left[ 0,2 \right].$
+  Deretter vis at
+  \begin{equation*}
+    \lim_{n\to \infty}L\left( f,P_n
+    \right)=\lim_{n\to \infty}U\left( f,P_n \right).
+  \end{equation*}
+  \\[-6pt]
+\end{oppgave}
+
+
+\begin{oppgave}{E8}
+  Finn gjennomsnittsverdien til $f(x) = e^{3x}$ på intervallet
+  $[-2,2]$.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{A9}
+  Regn ut
+  \begin{equation*}
+    \int \frac{x^2}{2+x^6} \dee x.
+  \end{equation*}
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{C10}
+  Finn arealet begrenset av $y = x/(x^2 + 16)$, $y = 0$, $x = 0$ og $x
+  = 2$.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{C11}
+  Funksjonene $ y =\sin^2(x)$ og $y=1$ avgrenser et uendelig antall
+  noe avrundede pizzastykker. Finn arealet av ett av disse.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{D12}
+  Regn ut
+  \begin{equation*}
+    \int e^x \sqrt{1+e^x}\dee x.
+  \end{equation*}
+  (H14)
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{B13}
+  Regn ut
+  \begin{equation*}
+    \int_0^1 e^{\arcsin x} \dee x.
+  \end{equation*}
+\end{oppgave}
+
+
+
+
+\end{document}

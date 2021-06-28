@@ -1,0 +1,198 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+
+\newcommand{\V}[1]{\mathbf{#1}}
+\newcommand{\vv}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}}
+\newcommand{\vvS}[2]{\left[ \begin{smallmatrix} #1 \\ #2 \end{smallmatrix} \right]}
+\newcommand{\vvv}[3]{\begin{bmatrix} #1 \\ #2 \\ #3 \end{bmatrix}}
+\newcommand{\vvvv}[4]{\begin{bmatrix} #1 \\ #2 \\ #3 \\ #4 \end{bmatrix}}
+\newcommand{\vvvvv}[5]{\begin{bmatrix} #1 \\ #2 \\ #3 \\ #4 \\ #5 \end{bmatrix}}
+\newcommand{\vn}[2]{\vvvv{#1_1}{#1_2}{\vdots}{#1_#2}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\M}{\mathcal{M}} % vektorrom av matriser
+\newcommand{\Cf}{\mathcal{C}} % vektorrom av kontinuerlige funksjoner
+\renewcommand{\P}{\mathcal{P}} % vektorrom av polynomer
+\newcommand{\B}{\mathscr{B}} % basis
+\newcommand{\roweq}{\sim}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Null}{Null}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Hom}{Hom}
+\newcommand{\tr}{^\top}
+\newcommand{\koord}[2]{[\,{#1}\,]_{#2}} % koordinater mhp basis
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 7 - Lineær algebra}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+
+
+\begin{oppgave}{E1}
+La 
+\[
+A=
+\begin{bmatrix}
+1 & -1 & 1 \\ -2 & 5 & -4 \\ -1 & 1 & -1
+\end{bmatrix}
+\quad
+\text{og }
+\quad
+b=
+\begin{bmatrix}
+28 \\ -20 \\ 10 
+\end{bmatrix} 
+\]
+Finn alle løsninger av systemet $Ax=b$, 
+og regn ut determinanten til $A$.\\
+Er kolonnene i $A$ lineært uavhengige?
+\end{oppgave}
+
+
+
+\begin{oppgave}{E2}
+Løs likningen $A\V{x}=\V{b}$ for 
+$$
+A=
+	\begin{bmatrix}
+	8  & -7 & 0 \\
+	-8 & -7 & 3 \\
+	-4 & 5  & -8\\
+	-6 & 6  & -4
+	\end{bmatrix}
+\qquad 
+\text{og}\quad
+        \V{b}=
+	\begin{bmatrix}
+	-3  \\
+	-7 \\
+	-3 \\
+	0
+	\end{bmatrix}.
+	$$
+	Er kolonnene i $A$ lineært uavhengige?
+\end{oppgave}
+
+
+\section*{Relevante eksamensoppgaver fra TMA4110/4115}
+
+\begin{oppgave}{D}
+2004V oppgave 4
+\end{oppgave}
+
+\begin{oppgave}{D}
+2004V oppgave 5 a)
+\end{oppgave}
+
+\begin{oppgave}{C}
+2004K oppgave 7
+\end{oppgave}
+
+\begin{oppgave}{C}
+2004H oppgave 3 a)
+\end{oppgave}
+
+\begin{oppgave}{C}
+2005V oppgave 3 a) og b)
+\end{oppgave}
+
+\begin{oppgave}{D}
+2005V oppgave 4
+\end{oppgave}
+
+\begin{oppgave}{D}
+2005K oppgave 4 a)
+\end{oppgave}
+
+\begin{oppgave}{D}
+2005K oppgave 5 a) og b)
+\end{oppgave}
+
+\begin{oppgave}{B}
+2005K oppgave 6
+\end{oppgave}
+
+\begin{oppgave}{C}
+2005H oppgave 3 a)
+\end{oppgave}
+
+
+\begin{oppgave}{E}
+2020V oppgave 1 
+\end{oppgave}
+\begin{oppgave}{E}
+2020V oppgave  2
+\end{oppgave}
+\begin{oppgave}{C}
+2020V oppgave  3
+\end{oppgave}
+\begin{oppgave}{E}
+2020V oppgave  4
+\end{oppgave}
+\begin{oppgave}{C}
+2020V oppgave  5
+\end{oppgave}
+\begin{oppgave}{D}
+2020V oppgave  6
+\end{oppgave}
+\begin{oppgave}{C}
+2020V oppgave  7
+\end{oppgave}
+\begin{oppgave}{C}
+2020V oppgave  8
+\end{oppgave}
+\begin{oppgave}{C}
+2020V oppgave  9
+\end{oppgave}
+\begin{oppgave}{B}
+2020V oppgave  10
+\end{oppgave}
+
+
+
+% -*- TeX-master: "oving01"; -*-
+\end{document}

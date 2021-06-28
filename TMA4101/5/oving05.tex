@@ -1,0 +1,120 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+\usepackage[american]{circuitikz}
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 5 - Funksjoner på $\mathbb{R}$}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+
+\section*{Obligatoriske oppgaver}
+
+\begin{oppgave}{E1}
+Regn ut
+\[
+\lim_{x\to 0}\frac{\exp\left(\sin(x^2)\right)-1}{1-\cos x}. 
+\]
+\end{oppgave}
+
+\begin{oppgave}{E2}
+Finn maksimum og minimum til funksjonen $f: [-\pi/2, \pi/2] \to \mathbb{R}$ gitt ved $f(x)=\sin |x|-\frac{x}{2}+1$. 
+\end{oppgave}
+
+
+
+\section*{Anbefalte oppgaver}
+
+\begin{oppgave}{D1}
+  Vis at ligningen $x^3 -15x +1 = 0$ har minst tre løsninger på
+  intervallet $[-4,4]$. 
+\end{oppgave}
+
+
+\begin{oppgave}{C2}
+  Hvor er $ f(x)=|x^2+3x+2| $ ikke deriverbar?
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{A3}
+  Vis at den deriverte at $f(x)=\sqrt[n]{x}$
+  er \[f'(x)=\frac{1}{nx^{\left(\frac{n-1}{n}\right)}}\] for alle
+  $x>0.$\\
+  (Vink: $a^n-b^n = (a - b)\sum_{j = 0}^{n - 1} a^jb^{n - 1 - j}$.)
+\end{oppgave}
+
+\begin{oppgave}{C4}
+  Finn
+  \begin{equation*}
+    \frac{\dee}{\dee t}\left((1+t)(1+2t)(1+3t)(1+4t)\right)
+  \end{equation*}
+  i punktet $t=0$.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{B5}
+  La $ f(x)=|1-x^2|.  $ Finn $f'(x)$.
+  \\[-6pt]
+\end{oppgave}
+
+
+\begin{oppgave}{E6}
+  En rakett skytes ut ved $t=0$. Farten er de første 120 sekundene er gitt ved 
+  \begin{equation*}
+    v(t)=0.0004t^3-0.03t^2+8t.
+  \end{equation*}
+  Finn den maksimale og minimale akselerasjonen. 
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{D7}
+  Finn grensen
+  \begin{equation*}
+    \lim_{x \to 0}\frac{x - \sin x}{x^3}.
+  \end{equation*}
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{D8}
+  La $f(x) = 1/(1 - x)$. Finn eventuelle lokale maksima og
+  minima på $(1,2)$ og på $[2,3]$. \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{D9}
+  Finn og klassifiser de kritiske punktene til $f(x ) =(x^2 - 3) e^x$.
+  \\[-6pt]
+\end{oppgave}
+
+\end{document}

@@ -1,0 +1,522 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{systeme}
+\usepackage[european,americanvoltages]{circuitikz}
+
+\newenvironment{amatrix}[1]{% "augmented matrix"
+  \left[\begin{array}{*{#1}{c}|c}
+}{%
+  \end{array}\right]
+}
+
+\newcommand{\V}[1]{\mathbf{#1}}
+\newcommand{\vv}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}}
+\newcommand{\vvS}[2]{\left[ \begin{smallmatrix} #1 \\ #2 \end{smallmatrix} \right]}
+\newcommand{\vvv}[3]{\begin{bmatrix} #1 \\ #2 \\ #3 \end{bmatrix}}
+\newcommand{\vvvv}[4]{\begin{bmatrix} #1 \\ #2 \\ #3 \\ #4 \end{bmatrix}}
+\newcommand{\vvvvv}[5]{\begin{bmatrix} #1 \\ #2 \\ #3 \\ #4 \\ #5 \end{bmatrix}}
+\newcommand{\vn}[2]{\vvvv{#1_1}{#1_2}{\vdots}{#1_#2}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\M}{\mathcal{M}} % vektorrom av matriser
+\newcommand{\Cf}{\mathcal{C}} % vektorrom av kontinuerlige funksjoner
+\renewcommand{\P}{\mathcal{P}} % vektorrom av polynomer
+\newcommand{\B}{\mathscr{B}} % basis
+\newcommand{\roweq}{\sim}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Null}{Null}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Hom}{Hom}
+\newcommand{\tr}{^\top}
+\newcommand{\koord}[2]{[\,{#1}\,]_{#2}} % koordinater mhp basis
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 6 - Lineær algebra}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+\begin{oppgave}{E1}
+Kretsen under modellerer en høyttaler, 
+og du finner den i ERT-ykt 7.
+\begin{center}
+	\begin{circuitikz}
+		\draw  (0,1) to [V=$V$] (0,4) to [ R=$R_2$,i=$i_1$] (4,4) to [R=$R_1$,i>_=$i_x$] (4,1) to [R=$R_2$]  (0,1); 
+		\draw  (4,4) to [R=$R_2$,i>^=$i_2$] (8,4) to [R=$R_1$] (8,1) to [R=$R_2$] (3,1) ;
+	\end{circuitikz}
+\end{center}
+\begin{itemize}
+\item[a)] Skriv $i_x$ som en funksjon av $i_1$ og $i_2$. 
+\item[b)] Bruk Kirchhoffs spenningslov
+til å sette opp en $2\times 2$ lineært likningssystem for $i_1$ og $i_2$. 
+Løs systemet, og sammenlikne med ERT-ykt 7. 
+\end{itemize}
+\end{oppgave}
+
+\begin{oppgave}{E2}
+La 
+\[
+A=
+\begin{bmatrix}
+1 & 1 & 1 \\ 2 & 1 & 0 \\ 4 & 2 & 1
+\end{bmatrix}
+\quad
+\text{og }
+\quad
+b=
+\begin{bmatrix}
+0 \\ 0 \\ 1 
+\end{bmatrix} 
+\]
+Finn $A^{-1}$ og løs $Ax=b$.
+\end{oppgave}
+
+
+
+
+\section*{Anbefalte oppgaver}
+
+
+
+\begin{oppgave}{E1}
+Skriv likningssystemet 
+\[
+\systeme{
+x - 4y + 28z = -2,
+-x + y - 7z = -31,
+x + 2y - 14z = 64
+}
+\]
+om til matriseform, og løs.
+\end{oppgave}
+
+\begin{oppgave}{D2}
+	Hvilke av matrisene 	
+		\[
+		 \quad
+		\begin{bmatrix}
+		1 & 5 & 0 & 0 \\
+		0 & 0 & 0 & 1
+		\end{bmatrix},
+		\quad
+		\begin{bmatrix}
+		1 & 0 \\
+		0 & 1 \\
+		0 & -1
+		\end{bmatrix},
+		\quad
+		\begin{bmatrix}
+		0 & 2 & 1 \\
+		0 & 0 & 4 \\
+		0 & 0 & 0
+		\end{bmatrix},
+		\quad \text{og} \quad		
+		\begin{bmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & 0 \\
+		0 & 0 & 0
+		\end{bmatrix}
+		\]
+	er på trappeform?  Hvilke av dem er på
+	redusert trappeform?
+\end{oppgave}
+
+
+\begin{oppgave}{C3}
+Løs ligningssystemene
+
+\begin{itemize}
+\item[a)]
+$
+\begin{amatrix}{3}
+1 & 1 & -1 & 0 \\
+  2 &- 3 & 1 & 1  \\
+ -1 &  1 & 2 &  4
+\end{amatrix}
+$
+\item[b)]
+$
+\begin{amatrix}{3}
+  1 & 1 & -1 & 0 \\
+ 2 & - 3 & 1 & 1\\
+ 4 & -1 & -1 & 3
+\end{amatrix}
+$
+\item[c)]
+$
+\begin{amatrix}{3}
+		1 & 1 & -1 &  0 \\
+		2 &- 3 & 1 & 1 \\
+		4 &- 1 &- 1 & 1
+\end{amatrix}
+$
+\item[d)]
+$
+\begin{amatrix}{3}
+	1 & 1 &-  1 & 0 \\
+		2 & - 3 &1&  1 
+		% 2x + 6y + 12z  8
+\end{amatrix}
+$
+\item[e)]
+$
+\begin{amatrix}{2}
+i  & 1   & -1 \\
+ 1 &i  & i
+\end{amatrix}
+$
+\item[f)]
+$
+\begin{amatrix}{2}
+1-i  & 1   & 1 \\
+ 1 &i & 1+i
+\end{amatrix}
+$
+\item[g)]
+$
+\begin{amatrix}{3}
+0 & 1  & 1 & 1 \\
+i & 1 & 1 & 1+i
+\end{amatrix}
+$
+\item[i)]
+$
+\begin{amatrix}{3}
+3 & -6  & 6 & -15 \\
+1 & 1 & 4 & 10
+\end{amatrix}
+$
+\end{itemize}
+
+\end{oppgave}
+
+
+
+
+
+\begin{oppgave}{C4}
+Anta at vi har et ligningssystem med $m$~ligninger og~$n$ ukjente.
+Hvilke av de ni forskjellige tilfellene i følgende tabell er mulige?
+\[
+\begin{array}{r|c|c|c|}
+                                & m < n & m = n & m > n \\ \hline
+\text{ingen løsninger}          &       &       &       \\ \hline
+\text{én løsning}               &       &       &       \\ \hline
+\text{uendelig mange løsninger} &       &       &       \\ \hline
+\end{array}
+\]
+\end{oppgave}
+
+
+\begin{oppgave}{C5}
+La $z$ være en løsning av ligningen $z^2+z+1=0$. 
+Finn en løsning av ligningssystemet med totalmatrise
+\[
+\begin{amatrix}{4}
+1 & 1 & 1 & 3 & 9 \\
+1 & 1& 1& -1& 1\\
+1  & z& z^2& 0& 0\\
+1     & z^2& z& 0 &0\\
+\end{amatrix}
+\]
+\end{oppgave}
+
+
+\begin{oppgave}{D6}
+Avgjør hvorvidt ligningssystemet gitt ved
+\[
+\begin{amatrix}{3}
+1 & 0 & 1 & 0 \\
+1 & 2& 3&  5\\
+1  & -2 & -1& 1\\
+0     & -4& -1& -1\\
+\end{amatrix}
+\]
+har en løsning.
+\end{oppgave}
+
+
+
+
+\begin{oppgave}{E7}
+La $\V{u} = \vv{3}{2}$ og~$\V{v} = \vv{-1}{1}$ være to vektorer
+i~$\R^2$.
+
+Regn ut $\V{u} + \V{v}$ og $\frac{1}{2} \V{u} - 2 \V{v}$,
+og tegn en figur som viser vektorene $\V{u}$, $\V{v}$, $\V{u} + \V{v}$ og
+$\frac{1}{2} \V{u} - 2 \V{v}$ i planet.
+\end{oppgave}
+
+
+\begin{oppgave}{D8}
+Finn ut om en vektor er en lineærkombinasjon av de andre:
+
+a) \quad
+$
+\begin{bmatrix}
+1\\
+2
+\end{bmatrix},
+\begin{bmatrix}
+2\\
+3
+\end{bmatrix},
+\begin{bmatrix}
+3\\
+4
+\end{bmatrix}
+$
+\quad
+\text{b)}
+\quad
+	$
+	\begin{bmatrix}
+	1\\
+	2\\
+	3\\
+	4
+	\end{bmatrix},
+	\begin{bmatrix}
+	2\\
+	3\\
+	4\\
+	5
+	\end{bmatrix},
+	\begin{bmatrix}
+	3\\
+	4\\
+	5\\
+	6
+	\end{bmatrix}
+	$
+	\quad
+\text{c)}
+\quad
+	$
+	\begin{bmatrix}
+	1\\
+	2\\
+	4
+	\end{bmatrix},
+	\begin{bmatrix}
+	2\\
+	3\\
+	5
+	\end{bmatrix},
+	\begin{bmatrix}
+	3\\
+	4\\
+	6
+	\end{bmatrix}
+	$
+\end{oppgave}
+
+
+\begin{oppgave}{E9}
+Finn en vektor som ikke er en lineærkombinasjon av:
+%
+	$$
+	\begin{bmatrix}
+	1\\
+	5\\
+	-3
+	\end{bmatrix},
+	\begin{bmatrix}
+	4\\
+	18\\
+	4
+	\end{bmatrix}
+	$$
+
+\end{oppgave}
+
+
+\begin{oppgave}{E10}
+	Finn en tredje vektor i samme plan som disse to vektorene:
+\[
+	\begin{bmatrix}
+	-3  \\
+	-7 \\
+	-3 \\
+	\end{bmatrix}
+	\quad\text{og}\quad
+	\begin{bmatrix}
+	8  \\
+	-8 \\
+	-4 \\
+	\end{bmatrix}
+\]
+\end{oppgave}
+
+
+
+%
+%
+%
+%
+%\begin{oppgave}
+%	La $m<n$. Kan $m$ vektorer spenne ut $\mathbb{R}^n$? 
+%\end{oppgave}
+%
+%
+
+\begin{oppgave}{C11}
+La $A$ og~$B$ være matriser, og $\V{v}$ en vektor:
+\[
+A =
+\begin{bmatrix}
+ 0 & 1 &  5 \\
+ 2 & 3 & -1 \\
+-8 & 0 & 2
+\end{bmatrix}
+\quad
+B =
+\begin{bmatrix}
+1 & 2 & 5 \\
+0 & 0 & 3
+\end{bmatrix}
+\quad
+\V{v} = \vvv{7}{2}{-4}
+\]
+Regn ut, eller forklar hvorfor uttrykkene ikke gir mening:
+
+\noindent
+\begin{minipage}{0.14\textwidth}
+
+a) $AB$
+
+
+b) $BA$
+
+
+c) $A^2$
+
+\end{minipage}
+\begin{minipage}{0.19\textwidth}
+
+d) $B^2$
+
+
+e) $A+B$
+
+
+f) $(A + I_3) \V{v}$
+
+\end{minipage}
+\begin{minipage}{0.1\textwidth}
+
+g) $BA\V{v}$
+
+
+h) $B\tr$
+
+
+i) $\V{v}\tr \V{v}$
+
+\end{minipage}
+\end{oppgave}
+
+
+
+\begin{oppgave}{C12}
+Løs likningen
+$A\V{x}=\V{b}$  
+der
+\[
+A=\begin{bmatrix}
+	1 & 2 & 3\\
+	2 & 3 & 4\\
+	3 & 4 & 5\\
+	4 & 5 & 6
+	\end{bmatrix}
+\quad
+\V{b}_2=
+	\begin{bmatrix}
+	1  \\
+	1 \\
+	1 \\
+	1
+	\end{bmatrix}
+\]
+\end{oppgave}
+
+
+\begin{oppgave}{C13}
+Finn en kvadratisk matrise~$A$ slik at:
+$A \vv{1}{0} = \vv{3}{5}$
+og
+$A \vv{1}{1} = \vv{-1}{0}$
+\end{oppgave}
+
+
+\begin{oppgave}{C14}
+Bestem om matrisene er inverterbare, og finn om mulig den inverse matrisen.
+
+
+a)
+$\begin{bmatrix}
+1 & 7 \\
+-1 & 1 \\
+\end{bmatrix}$
+
+
+
+b)
+$\begin{bmatrix}
+1 & 0 & 0\\
+1 & 1 & 0\\
+1 & 1 & 1
+\end{bmatrix}$
+
+
+\end{oppgave}
+
+
+
+
+
+
+
+
+\end{document}

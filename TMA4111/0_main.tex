@@ -1,0 +1,52 @@
+\documentclass[a4paper,norsk,11pt]{00_style_interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4111}
+\emnenavn{Matematikk 3 for MTELSYS}
+\title{Tema}      % Endre dette for hver time
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+% Seksjoner
+\input{1_introduksjon}
+
+\input{2_standardoppgaver}
+
+\input{3_viderekomne_oppgaver}
+
+
+
+\end{document}

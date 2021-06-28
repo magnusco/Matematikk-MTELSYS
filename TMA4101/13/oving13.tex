@@ -1,0 +1,144 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage[american]{circuitikz}
+\usepackage{url}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 13 - Anvendelser av taylors teorem og taylorrekker}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{1}
+Funksjonene
+$
+f(x)=x^2
+$
+og 
+$
+g(x)=\sin x
+$
+skjærer hverandre i et punkt i intervallet $[0.5,1]$. 
+Dersom man ønsker å finne denne ved fikspunktiterasjon, 
+har man valget mellom å skrive likningen om til 
+\[
+x=\sqrt{\sin x}
+\]
+eller 
+\[
+x=\arcsin\left(x^2\right)
+\]
+Den ene av disse gjør jobben, og den andre gjør det ikke. 
+Avgjør hvilken av dem som funker.
+\end{oppgave}
+
+\begin{oppgave}{2}
+Vi skal tilnærme den deriverte til funksjonen $\sin x$ i punktet $x=1$ med formelen 
+\begin{equation*}
+f'(x) \approx \frac{f(x+h)-f(x-h)}{2h}.
+\end{equation*} 
+Bruk formelen for $h=0.1$,  $h=0.01$,  $h=0.001$ osv. 
+Hvor høy presisjon klarer du å oppnå med denne strategien, 
+og hva er den minste $h$ som er vits i å bruke? 
+Kan du forklare hva som skjer?
+\end{oppgave}
+
+
+
+
+\section*{Anbefalte oppgaver}
+
+\begin{oppgave}{1}
+Finn en approksimasjon til $f'(x)$ basert på punktene $x$, $x-h$ og $x-2h$. 
+Approksimasjonen skal ha så høy orden som mulig.
+\end{oppgave}
+
+\begin{oppgave}{2}
+Vis at sentraldifferansen 
+\begin{equation*}
+f'(x) \approx \frac{f(x+h)-f(x-h)}{2h}
+\end{equation*} 
+har orden $h^2$.
+\end{oppgave}
+
+\begin{oppgave}{3}
+Hvilken derivert er 
+\begin{equation*}
+\frac{-f(x-2h)+16f(x-h)-30f(x)+16f(x+h)-f(x+2h)}{12h^2}
+\end{equation*}
+en tilnærming til, og hva er ordenen?
+\end{oppgave}
+
+\begin{oppgave}{4}
+Vi skal tilnærme den deriverte til funksjonen $\sin x$ i punktet $x=1$ med formelen 
+\begin{equation*}
+f'(x) \approx \frac{f(x+h)-f(x-h)}{2h}.
+\end{equation*} 
+Men nå skal vi bruke Richardson-ekstrapolasjon. 
+Hvor høy presisjon klarer du å oppnå?
+\end{oppgave}
+
+
+\begin{oppgave}{5}
+Lag et script som løser likningen $x=\cos x$ til maskinpresisjon med den vanlige fikspunktiterasjonen $x_{n+1}=\cos(x_n)$. Hvor mange iterasjoner trengs med startverdi $x=1$?
+\end{oppgave}
+
+\begin{oppgave}{6}
+Lag et script som løser likningen $x=\cos x$ til maksinpresisjon med Newtons metode. Hvor mange iterasjoner trengs med startverdi $x_0=1$?
+\end{oppgave}
+
+
+\begin{oppgave}{7}
+Bruk Newtons metode til å finne $\sqrt[3]{7}$ til maskinpresisjon. 
+\end{oppgave}
+
+
+
+\begin{oppgave}{8}
+Løs likningen $x \ln x=1$ til maskinpresisjon med den klassiske fikspunktiterasjonen. 
+Merk at likningen kan skrives om til $x=g(x)$ på flere måter.
+\end{oppgave}
+
+\begin{oppgave}{9}
+Løs likningen $x \ln x=1$ til maskinpresisjon med Newtons metode. 
+\end{oppgave}
+
+\begin{oppgave}{10}
+Løs likningen $x^3-x^2+x+2$ til maksinpresisjon med Newtons metode og startverdi $x=-1$. Gi et a priori estimat for hvor mange iterasjoner som trengs.
+\end{oppgave}
+
+\end{document}

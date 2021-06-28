@@ -1,0 +1,199 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage[american]{circuitikz}
+
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 10 - Differensiallikninger}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{1}
+Delbrøksoppspaltning er en teknikk for å spalte store stygge brøker.
+Denne undervises gjerne i forbindelse med integrasjon eller laplacetransform.
+Å lære seg å spalte alle verdens brøker er en del jobb,
+og ikke kjempenyttig, 
+men står i Adams på s. 344. 
+I denne oppgaven skal vi spalte
+\[
+\frac{1}{(s+1)(s^2+1)}=\frac{A}{s+1}+\frac{Bs+C}{s^2+1}.
+\]
+Finn $A$, $B$ og $C$. 
+
+(Hint: gang opp med $(s+1)(s^2+1)$ og sammenlikne begge sider av den resulterende likningen.
+Det er også mulig å spalte slik:
+\[
+\frac{1}{(s+1)(s^2+1)}=\frac{1}{(s+1)(s+i)(s-i)}=\frac{A}{s+1}+\frac{B}{s+i}+\frac{C}{s-i}
+\]
+men dette blir mer jobb.)
+\end{oppgave}
+
+
+\begin{oppgave}{2}
+Dersom du summerer spenningsfallet over kretsen under, 
+vil du få en variant av likningen 
+\[
+y'(t)+y(t)=f(t).
+\]
+Finn den analytiske løsningen når $f(t)=\sin t$.
+\begin{center}
+	\begin{circuitikz}
+		\draw  (0,1) to [V=$f(t)$] (0,3) to [R ] (4,3) to [C] (4,1) to  (0,1);
+	\end{circuitikz}
+	
+%	\begin{circuitikz}
+%		\draw (1.1,1) to [short, o-] (0,1) to [R = $R$] (0,4) to[C=$C$] (3,4) to [L = $L$] (3,1) to  [short, -o] (1.9,1);
+%		\draw (1.5, 1) node [below] {$v(t)$};
+%	\end{circuitikz}
+\end{center}
+\end{oppgave}
+
+\section*{Anbefalte oppgaver}
+
+%\begin{oppgave}{E2}
+%Dersom du summerer spenningsfallet over kretsen under, 
+%vil du få en variant av likningen 
+%\[
+%y'(t)+y(t)+\exp y(t)=f(t)
+%\]
+%\begin{center}
+%	\begin{circuitikz}
+%		\draw  (0,1) to [V=$f(t)$] (0,3) to [R ] (4,3) to [C] (4,1) [D] to (0,1);
+%	\end{circuitikz}
+%	
+%%	\begin{circuitikz}
+%%		\draw (1.1,1) to [short, o-] (0,1) to [R = $R$] (0,4) to[C=$C$] (3,4) to [L = $L$] (3,1) to  [short, -o] (1.9,1);
+%%		\draw (1.5, 1) node [below] {$v(t)$};
+%%	\end{circuitikz}
+%\end{center}
+%Lag et pythonscript som løser denne likningen numerisk for $f(t)=1$ og $y(0)=1$ med 
+%\begin{itemize}
+%\item[a)] Eulers eksplisitte metode.
+%\item[b)] Eulers implisitte metode.
+%\end{itemize}
+%\end{oppgave}
+
+
+
+
+
+
+
+\begin{oppgave}{1}
+  Løs initialverdiproblemet
+  \begin{equation*}
+    2y'=xy, \qquad y(0)=-2.
+  \end{equation*}
+\end{oppgave}
+
+\begin{oppgave}{2}
+    Løs initialverdiproblemet
+    \begin{equation*}
+      y' = 1-y^2, \qquad y(0)=0.5
+    \end{equation*}
+\end{oppgave}
+
+\begin{oppgave}{3}
+Newtons avkjølingslov sier at temperaturen $T$ i en kokt elgtunge som settes inn i kjøleskapet (eller ut av kjøleskapet, eller inn i stekeovnen osv), 
+følger initialverdiproblemet
+\[
+T'(t)+\alpha \left(T(t)-T_k\right)=0 \quad T(0)=T_0,
+\]
+der $t$ er tiden, $T_0$ er temperaturen til elgtungen i det den settes inn  i kjøleskapet, 
+$T_k$ er temperaturen i kjøleskapet,
+og $\alpha$ er en konstant som avhenger av varmeflyten mellom elgtungen og omgivelsene. 
+
+  En melkekartong der temperaturen i melken var $6^\circ$C, ble
+  stående på kjøkkenbenken i $2$ timer. Da var temperaturen steget til
+  $13^\circ$C. Lufttemperaturen i kjøkkenet var $20^\circ$C. Vi regner
+  med at Newtons avkjølingslov gjelder, det vil si at
+  temperaturendringen per tidsenhet i melken er proporsjonal med
+  differansen mellom lufttemperaturen og temperaturen i melken.
+
+  % a)
+  \bPunkt
+    Sett opp en differensialligning for temperaturen $T$ i melken som
+    funksjon av tiden $t$, og vis at den har løsning av formen
+    \begin{equation*}
+      T(t) = A+ Be^{- \alpha t}
+    \end{equation*}
+    der $A$ er lufttemperaturen. Finn konstantene $B$ og $\alpha$.
+  \ePunkt
+
+  % b)
+  \bPunkt
+    Da temperaturen i melken var $15^\circ$C, ble kartongen satt
+    inn i kjøleskapet. Etter $1$ time var temperaturen i melken sunket
+    til $12^\circ$C. Hva var temperaturen i kjøleskapet?
+  \ePunkt
+\end{oppgave}
+%
+%
+
+\begin{oppgave}{4}
+  Finn en ligning for en kurve som passerer gjennom $(2,3)$ og har
+  stigning $\displaystyle\frac{2x}{1+y^2}$.
+  \\[6pt]
+\end{oppgave}
+
+
+
+%\begin{oppgave}{E1}
+%En bestemt virusepidemi i et ikke navngitt samfunn er det slik at hver smittede person smitter to nye hver dag. 
+%Dersom viruset introduseres av en person som kommer hjem fra skiferie, 
+%hvor mange dager tar det før tusen mennesker er smittet?
+%Hvor mange dager tar det før en million er smittet?
+%\end{oppgave}
+%
+%
+%\begin{oppgave}{A1}
+%Utled løsningsuttrykket 
+%\[
+%y(t)=
+%\]
+%for 
+%\[
+%y'(t)+y(t)=f(t)
+%\]
+%for en generell $f$.
+%\end{oppgave}
+
+
+
+
+\end{document}

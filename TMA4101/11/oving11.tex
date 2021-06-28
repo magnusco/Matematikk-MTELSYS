@@ -1,0 +1,124 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage[american]{circuitikz}
+\usepackage{url}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 11 - Differensiallikninger}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{1}
+Kretsen under modelleres av en differensiallikning på formen
+\[
+f(t)=y'(t) + y(t)+ \exp y(t)-1.
+\]
+Sett $f(t)=1$, $y(0)=0$, og løs likningen numerisk med 
+\begin{itemize}
+\item[a)] Eulers eksplisitte metode.
+\item[b)] Eulers implisitte metode.
+\end{itemize}
+\begin{center}
+	\begin{circuitikz}
+		\draw  (0,1) to [I=$f(t)$] (0,3) to (6,3) to [C] (6,1) to  (0,1);
+		\draw  (2,3) to [R] (2,1) ;
+		\draw  (4,3) to [D] (4,1) ;
+	\end{circuitikz}
+	
+%	\begin{circuitikz}
+%		\draw (1.1,1) to [short, o-] (0,1) to [R = $R$] (0,4) to[C=$C$] (3,4) to [L = $L$] (3,1) to  [short, -o] (1.9,1);
+%		\draw (1.5, 1) node [below] {$v(t)$};
+%	\end{circuitikz}
+\end{center}
+\end{oppgave}
+
+\begin{oppgave}{2}
+Vi skal studere initialverdiproblemet
+\[
+y'+30y=0 \quad y(0)=1
+\]
+som har eksakt løsning 
+\[
+y(t)=e^{-30t}.
+\]
+Finn den tilnærmede løsningen i $t=1$ med både Eulers eksplisitte og implisitte metode. 
+La $n$ være antall gitterpunkter, og test metodene for verdiene forskjellige verdier mellom $n=10$ og $n=20$. 
+Kan du forklare hva som skjer?
+\end{oppgave}
+
+
+
+
+\section*{Anbefalte oppgaver}
+
+\begin{oppgave}{1}
+Vi skal studere initialverdiproblemet
+\[
+y'-xy^2=0 \quad y(0)=1.
+\]
+\begin{itemize}
+\item[a)]
+Vis at dette problemet har analytisk løsning 
+\[
+y(x)=\frac{2}{2-x^2}.
+\]
+\item[b)]
+Skriv to script for å tilnærme løsningen i $x=1$; et som bruker Eulers eksplisitte metode, og et som bruker Heuns metode. 
+Hvor liten må $h$ være for å oppnå en presisjon på $10^{-5}$? (Du kan sammenlikne med den eksakte løsningen.)
+\end{itemize}
+\end{oppgave}
+
+
+\begin{oppgave}{2}
+Initialverdiproblemet 
+\[
+y'=y^2-y^3 \quad y(0)=0.01,
+\]
+modellerer radien $y$ til en fyrstikkflamme som akkurat er tent. 
+Lag et script som tilnærmer løsningen ved trapesmetoden, og plotter 
+løsningen 
+for $t \in [0,200]$. 
+\end{oppgave}
+
+
+
+
+
+
+
+\end{document}

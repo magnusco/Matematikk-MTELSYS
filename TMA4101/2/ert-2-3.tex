@@ -1,0 +1,200 @@
+\input{../preamble.tex}
+\title{Superposisjonsprinsippet}
+
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+De enkleste modelleringsproblemene i anvendelser er ofte \textbf{lineære}.
+
+
+
+\section*{Standardoppgaver}
+
+Det er viktig å vite hvordan man ganger sammen vektorer og matriser.
+Det gjøres slik:
+\[
+\begin{bmatrix}
+2 & 3 & 4 \\
+3 & 4 & 5 \\
+4 & 5 & 7 \\
+1 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+=
+x_1
+\begin{bmatrix}
+2  \\
+3  \\
+4 \\
+1
+\end{bmatrix}
++
+x_2
+\begin{bmatrix}
+ 3  \\
+4  \\
+ 5 \\
+ 1
+\end{bmatrix}
++
+x_3
+\begin{bmatrix}
+4 \\
+5 \\
+7 \\
+1
+\end{bmatrix}
+\]
+Det er viktig å forstå at dette er en definisjon. 
+Vi ganger sammen matriser og vektorer slik fordi noen har skjønt at det kommer noen godt ut av dette. 
+Nå skal vi se litt på hva.
+
+
+\begin{tcolorbox}[colback=blue!10, title=Superposisjonsprinsippet]
+La $\mathbf x$ og $\mathbf y$ være vektorer, 
+og $c$ en skalar. 
+En lineæravbildning $T$ er en funksjon som tilfredsstiller
+\begin{align*}
+T(\mathbf x+\mathbf y)&=T(\mathbf x)+T(\mathbf y) \\
+T(c\mathbf x)&=cT(\mathbf x)
+\end{align*}
+\end{tcolorbox}
+
+
+\begin{oppgave}{S1}
+Sett opp et likningssystem for kretsen under (alle motstandene er $1\Omega$),
+og løs likningssystemet for
+\[
+\begin{bmatrix}
+V_1 \\
+V_2 \\
+V_3 \\
+V_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \\
+0 \\
+0 \\
+0 
+\end{bmatrix},
+\quad 
+\begin{bmatrix}
+V_1 \\
+V_2 \\
+V_3 \\
+V_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+1 \\
+0 \\
+0 
+\end{bmatrix},
+\quad
+\begin{bmatrix}
+V_1 \\
+V_2 \\
+V_3 \\
+V_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+0 \\
+1 \\
+0 
+\end{bmatrix}
+\quad
+\text{og}
+\quad
+\begin{bmatrix}
+V_1 \\
+V_2 \\
+V_3 \\
+V_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+0 \\
+0 \\
+1 
+\end{bmatrix}
+\]
+\begin{center}
+	\begin{circuitikz}
+		\draw  (0,3) to [V=$V_1$] (0,0);
+		\draw  (0,3) to [R] (3,3) to [R] (3,0) to [R] (0,0); 
+		\draw  (3,3) to [R] (6,3);
+		\draw (3,0) to [R] (6,0); 
+		\draw  (6,3) to [V=$V_3$] (6,0);
+		\draw  (0,6) to [R] (3,6) to [R] (3,3); 
+		\draw  (0,6) to [V=$V_2$] (0,3);
+		\draw  (3,6) to [R] (6,6); 
+		\draw (6,6) to [V=$V_4$] (6,3);
+		\end{circuitikz}
+\end{center}
+\end{oppgave}
+
+\begin{oppgave}{S2}
+Finn strømmene i kretsen når
+\[
+\begin{bmatrix}
+V_1 \\
+V_2 \\
+V_3 \\
+V_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+4 \\
+3 \\
+2 \\
+1 
+\end{bmatrix}
+\]
+\end{oppgave}
+
+
+
+\section*{Viderekomne oppgaver}
+
+\begin{oppgave}{V1}
+Vis at matrise-vektorproduktet er en lineæravbildning, 
+og forklar hvorfor dette impliserer at du kan basere din løsning av S2 på din løsning av S1.
+\end{oppgave}
+
+\begin{oppgave}{V2}
+Finn strømmene i kretsen. (Alle motstandene er fortsatt 1$\Omega$. Her kan python komme godt med, så du slipper å gausseliminere en $8\times 8$-matrise.)
+\begin{center}
+	\begin{circuitikz}
+		\draw  (0,3) to [V=$V_1$] (0,0);
+		\draw  (0,3) to [R] (3,3) to [R] (3,0) to [R] (0,0); 
+		\draw  (3,3) to [R] (6,3);
+		\draw (3,0) to [R] (6,0); 
+		\draw  (6,3) to [V=$V_3$] (6,0);
+		\draw  (0,6) to [R] (3,6) to [R] (3,3); 
+		\draw  (0,6) to [V=$V_2$] (0,3);
+		\draw  (3,6) to [R] (6,6); 
+		\draw (6,6) to [V=$V_4$] (6,3);
+		\draw  (6,3) to [R] (9,3) to [R] (9,0) to [R] (6,0); 
+		\draw  (9,3) to [R] (12,3);
+		\draw (9,0) to [R] (12,0); 
+		\draw  (12,3) to [V=$V_5$] (12,0);
+		\draw  (6,6) to [R] (9,6) to [R] (9,3); 
+		\draw  (9,6) to [R] (12,6); 
+		\draw (12,6) to [V=$V_6$] (12,3);
+		\end{circuitikz}
+\end{center}
+\end{oppgave}
+
+\end{document}

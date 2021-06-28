@@ -1,0 +1,126 @@
+
+\input{../preamble.tex}
+
+
+\title{Determinanter}
+
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+I denne øvingen skal vi se på en enkel metode for å avgjøre om lineære likningssystemer har løsning, 
+og hvorvidt denne er entydig. 
+
+\section*{Standardoppgaver}
+
+
+I forrige uke løste vi systemene
+\[
+\begin{amatrix}{3}
+2 & 3 & 4 &4 \\
+3 & 4 & 5 &5 \\
+4 & 5 & 7 &3
+\end{amatrix}
+\]
+og
+\[
+\begin{amatrix}{3}
+2 & 3 & 4 &4 \\
+3 & 4 & 5 &5 \\
+4 & 5 & 6 &3
+\end{amatrix}
+\]
+og
+\[
+\begin{amatrix}{3}
+2 & 3 & 4 &4 \\
+3 & 4 & 5 &5 \\
+4 & 5 & 6 &6
+\end{amatrix}
+\]
+og
+\[
+\begin{amatrix}{3}
+2 & 3 & 4 &0 \\
+3 & 4 & 5 &0 \\
+4 & 5 & 6 &0
+\end{amatrix}
+\]
+
+\begin{oppgave}{S1}
+Alle punkter $(x,y,z)$ som passer i likningen 
+\[
+ax+by+cz=d
+\]
+ligger på ett og samme plan i rommet. 
+(Dette lærte du på skolen.)
+Bruk dette til å forklare alt som skjedde i systemene ovenfor,
+og forklar hvordan du kan se om et når et $3\times 3$-likningssystem har entydig løsning.
+\end{oppgave}
+
+Gå nå i en eller annen kilde og finn ut hva en determinant er og hvordan man beregner den.
+
+\begin{oppgave}{S2}
+Forklar hvorfor
+\[
+\begin{amatrix}{4}
+3&-1&-1&0& 1 \\
+-1&3&0&-1& 0 \\
+-1&0&3&-1& 0 \\
+0&-1&-1&3& 0 
+\end{amatrix}
+\]
+har entydig løsning.
+\end{oppgave}
+
+\begin{oppgave}{S3}
+Avgjør om likningssystemet
+\[
+\begin{amatrix}{4}
+3&-1&-1&0& 0 \\
+-1&3&0&-1& 0 \\
+-1&0&3&-1& 0 \\
+1&2&2&1& 0 
+\end{amatrix}
+\]
+har entydig løsning.
+\end{oppgave}
+
+\section*{Viderekomne oppgaver}
+
+\begin{oppgave}{V1}
+Ta stilling til påstanden:
+\begin{tcolorbox}
+En lineær resistiv krets gir alltid opphav til en linæert likningssystem med entydig løsning.
+\end{tcolorbox}
+\end{oppgave}
+
+
+
+\begin{oppgave}{V2}
+Løs likningssystemet
+\[
+\begin{amatrix}{2}
+a&b&m \\
+d&e& n 
+\end{amatrix}
+\]
+\end{oppgave}
+
+\begin{oppgave}{V3}
+Løs likningssystemet
+\[
+\begin{amatrix}{7}
+0&1&1&0&0&0&1&0 \\
+0&0&0&0&1&0&1&0 \\
+0&0&0&0&0&1&1&0 \\
+0&0&0&0&0&0&0&0 
+\end{amatrix}
+\]
+\end{oppgave}
+
+
+\end{document}

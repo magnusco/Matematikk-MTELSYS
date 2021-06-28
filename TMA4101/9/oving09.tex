@@ -1,0 +1,286 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 9 - Integralet}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+\section*{Obligatoriske oppgaver}
+
+
+\begin{oppgave}{1}
+  En beholder med høyde $4$ lages ved å rotere kurven
+  $y = x^2$, $0 \leq x \leq 2$, om aksen $x = -1$ og sette en
+  plan bunn i.  Finn volumet $V$ av beholderen.
+\end{oppgave}
+
+\begin{oppgave}{2}
+  La funksjonen $F$ være definert for $x \geq 1$ ved
+  \begin{equation*}
+    F(x) = \int_1^x \sqrt{t^3 - 1} \dee t,
+  \end{equation*}
+  og la $K$ være kurven $y = F(x)$ for $1 \leq x \leq 2$.  Finn
+  buelengden av $K$.
+\end{oppgave}
+
+
+
+
+\section*{Anbefalte oppgaver}
+
+\begin{oppgave}{1}
+  % a)
+  \bPunkt
+    Et vannkar dannes ved å rotere kurven
+    \begin{equation*}
+      y = \frac{x^3}{4}, \qquad x \geq 0
+    \end{equation*}
+    om $y$-aksen. Finn volumet av karet opp til høyde $h$.
+  \ePunkt
+
+  % b)
+  \bPunkt
+    Karet fylles med vann. Hvor fort stiger vannhøyden i karet
+    idet høyden er $2$ dm og vannet strømmer inn med $10$ liter per
+    sekund? (Vi antar at $x$ og $y$ er målt i dm.)
+  \ePunkt
+\end{oppgave}
+
+\begin{oppgave}{2}
+  Et $45^\circ$ hakk karves inn til midten av en sylindrisk kubbe som
+  er $40$cm tykk, slik som i Figur $7.20$ på s.\ $406$ i læreboka. Den
+  ene overflaten til hakket er vinkelrett på aksen som går gjennom
+  kubben. Hvor mye tre (i volum) ble fjernet ved å lage dette hakket?
+\end{oppgave}
+
+\begin{oppgave}{3}
+  La $f(x)$ være en ikkenegativ funksjon som er deriverbar med
+  kontinuerlig derivert for $x \geq 1$. Buelengden til kurven
+  $y = f(x)$ fra $x = 1$ til $x = u$ er gitt ved en funksjon
+  $H(u)$. Bestem funksjonen $f$ dersom
+  \begin{equation*}
+    H(u) = \frac{u^3}{3} + u -\frac{4}{3} \quad \text{og} \quad f(1) =
+    0.
+  \end{equation*}
+\end{oppgave}
+
+\begin{oppgave}{4}
+  Lisa skal bake smultringer på dugnad for UKA-$19$. Smultringene skal
+  være $2$cm tykke, ha senterhull på $2$cm i diameter og dekkes med
+  sjokoladeglasur. Det trengs $5$dl glasur for å dekke $1$
+  kvadratmeter bakverk. Hvor mye sjokoladeglasur trenger hun om hun
+  skal lage 100 smultringer?
+\end{oppgave}
+
+\begin{oppgave}{5}
+  Et av svømmebassengene på Pirbadet er $20$ meter langt, $8$ meter
+  bredt og har en skrå bunn som er slik at dybden ved den ene
+  kortsiden er $1$ meter, og $3$ meter ved den andre. Finn den totale
+  kraften som virker på bassengbunnen, som følge av trykket i væsken,
+  når bassenget er fylt opp med vann.
+\end{oppgave}
+
+
+\begin{oppgave}{6}
+  La $S$ være området i $xy$-planet som er avgrensa av kurvene $y=x^2$
+  og $y=\sqrt{x}$ mellom $x=0$ og $x=1$. Finn volumet av
+  omdreiningslegemet som oppstår ved å dreie $S$ om $x$-aksen. Bruk
+  både sylinderskallmetoden og skivemetoden.\\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{7}
+  La $R$ være området avgrenset av $y=x$ og $y=x^2$ mellom $x=0$ og
+  $x=1$.
+
+  \setcounter{Punkt}{0}
+
+  % a)
+  \bPunkt
+    Finn volumet av omdreiningslegemet som oppstår når $R$ blir rotert
+    om $x$-aksen.
+  \ePunkt
+
+  % b)
+  \bPunkt
+    Finn volumet av omdreiningslegemet som oppstår når $R$ blir rotert
+    om $y$-aksen.
+  \ePunkt
+\end{oppgave}
+
+\begin{oppgave}{8}
+  Et legeme er 6 meter høyt. Det horisontale tversnittet i en høyde
+  $z$ meter over grunnflata er et rektangel med lengde $2 + z$ meter og
+  bredde $8 - z$ meter. Finn volumet av legemet.\\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{9}
+  Finn buelengden til kurven $$ y^2= (x-1)^3$$ fra $(1,0)$ til
+  $(2,1)$.\\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{10}
+  Finn arealet av overflata som oppstår ved å rotere kurven
+  $$y=x^2, \quad 0\leq x \leq 2$$ om $y$-aksen.\\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{11}
+  La $A$ være området i $xy$-planet som er avgrensa av kurvene
+  \begin{align*}
+    &y_1=4-x^2 \\
+    &y_2=2-x.
+  \end{align*}
+  Bestem volumet av omdreiningslegemet som oppstår ved å dreie $A$ om
+  $x$-aksen. \\[3mm] (H16) \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{12}
+  La $a$ og $h$ være positive størrelser, og la $A$ være området i
+  $1$. kvadrant avgrenset av parabelen $y=ax^2$, $y$-aksen og den
+  horisontale linjen $y=h$. Området $A$ roteres om $y$-aksen.
+
+  \setcounter{Punkt}{0}
+
+  % a)
+  \bPunkt
+    Området $A$ roteres om $y$-aksen. Finn volumet til rotasjonslegemet.
+  \ePunkt
+
+  % b)
+  \bPunkt
+    Anta at rotasjonslegemet er fylt med vann som deretter tappes ut. I
+    et gitt øyeblikk er vannhøyden 1 m, og vannet strømmer ut med en
+    hastighet av $2$ dm$^3$ pr. sekund. Hvis $a= \pi $(dm$^{-1}$), hvor
+    raskt avtar vannhøyden i dette øyeblikket?
+  \ePunkt
+  (Sommer 2013)\\[-6pt]
+\end{oppgave}
+
+%
+%\begin{oppgave}{1}
+%  Bruk delvis integrasjon til å beregne integralet 
+%  \begin{equation*}
+%    \int e^{2x} \sin(3x) \dee x.
+%  \end{equation*}
+%\end{oppgave}
+%
+%\begin{oppgave}{2}
+%  Regn ut integralet 
+%  \begin{equation*}
+%    \int \frac{x^2 \dee x}{x^2 +3x +2}.
+%  \end{equation*}
+%\end{oppgave}
+%
+%\begin{oppgave}{3}
+%  Avgjør om integralet 
+%  \begin{equation*}
+%    \int_{-1}^\infty \frac{x +3}{x^2 +4x +4} \dee x
+%  \end{equation*}
+%  konvergerer eller divergerer.
+%\end{oppgave}
+%
+%\begin{oppgave}{4}
+%  % a)
+%  \bPunkt
+%    Vis at 
+%    \begin{equation*}
+%      \lim_{x \to 0+} x^c \ln x = 0
+%    \end{equation*}
+%    når $c > 0$.
+%  \ePunkt
+%
+%  % b)
+%  \bPunkt
+%    Regn ut det uegentlige integralet 
+%    \begin{equation*}
+%      \int_0^1 x^a \ln x \dee x
+%    \end{equation*}
+%    når $a > -1$. Hva kan du si om integralet når $a = -1$?
+%  \ePunkt
+%\end{oppgave}
+%
+%\begin{oppgave}{5}
+%  Regn ut de ubestemte integralene 
+%  \begin{equation*}
+%    (i) \int \frac{1 + \sqrt{x}}{1+ \sqrt[3]{x}} \dee x \hspace{1.5cm}
+%    (ii)  \int \frac{\dee\theta}{3+ 2\cos \theta}. 
+%  \end{equation*}
+%\end{oppgave}
+%
+%Regn ut integralene. (NB: noen av dem er ganske vanskelige.)
+%
+%  \begin{oppgave}{1}
+%    $\displaystyle\quad \int (x^2-2x)e^{kx}\dee x.$
+%  \end{oppgave}
+%  
+%  
+%  \begin{oppgave}{2}
+%    $\displaystyle\quad \int (\arcsin x)^2\dee x.$
+%  \end{oppgave}
+%  
+%  \begin{oppgave}{3}
+%    $\displaystyle\quad \int \frac{x \dee x }{3x^2+8x-3}.$
+%  \end{oppgave}
+%  
+%  
+%  \begin{oppgave}{4}
+%    $\displaystyle\quad \int \frac{\dee x}{x^4-a^4}.$
+%  \end{oppgave}
+%  
+%  
+%  \begin{oppgave}{5}
+%    $\displaystyle\quad \int \frac{\dee x}{x\sqrt{9-x^2}}.$
+%  \end{oppgave}
+%  
+%  
+%  \begin{oppgave}{6}
+%    $\displaystyle\quad \int_0^{\pi/2} \frac{ d\theta}{1+\cos \theta +\sin\theta}.$ 
+%  \end{oppgave}
+%  
+%  \begin{oppgave}{7}
+%    $\displaystyle\quad \int_e^{\infty} \frac{\dee x}{x\ln x}.$
+%  \end{oppgave}
+%  
+%  
+%  \begin{oppgave}{8}
+%    $\displaystyle\quad \int_2^{\infty} \frac{\dee x}{\sqrt{x}\ln x}.$
+%  \end{oppgave}
+
+
+
+
+\end{document}

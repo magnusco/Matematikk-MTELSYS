@@ -1,0 +1,131 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage[american]{circuitikz}
+\usepackage{url}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Øving 12 - Taylorrekker}
+%\author{Fourieranalyse}
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+
+
+
+
+
+\section*{Obligatoriske oppgaver}
+
+\begin{oppgave}{1} 
+  Avgjør for hvilke $x$ potensrekken
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \frac{(-1)^n}{n!2^n}x^{2n}
+  \end{equation*}
+  konvergerer, og finn et endelig uttrykk for summen til rekken.
+\end{oppgave}
+
+\begin{oppgave}{2}
+  Finn taylorrekken til 
+  \begin{equation*}
+    f(x) = \ln(1+2x)
+  \end{equation*} 
+  om 0. Hva er konvergensradien?
+\end{oppgave}
+
+
+\section*{Anbefalte oppgaver}
+
+\begin{oppgave}{1}
+  Finn konvergensradius, -intervall og -sentrum for
+  $\sum_{n=1}^{\infty}\frac{(4x-1)^{n}}{n^n}.$
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{2}
+  Hva konvergerer $\sum_{n=0}^{\infty}\frac{n+1}{2^n}$ til?
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{3}
+Finn taylorrekkene om $x =
+0$ til  
+    $\cos^2 (x/2)$
+og 
+    $\displaystyle\int_0^x \cos(t^2)\dee t$.
+\end{oppgave}
+
+\begin{oppgave}{4}
+  Finn en tilnærming til 
+  \begin{equation*}
+    \int_0^{1/2} \cos(t^2)\dee t
+  \end{equation*}
+  med tre korrekte desimaler.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{5}
+  Regn ut $\displaystyle\lim_{x\to 0}
+  \frac{(e^x-1-x)^2}{x^2-\ln(1+x^2)}$.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{6}
+  Avgjør om
+  \begin{equation*}
+    \sum_{n=1}^{\infty}\frac{n^2}{(1+2^n)(1+n\sqrt{n})}
+  \end{equation*}
+  konvergerer.
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{7}
+  For hvilke $x$ konvergerer rekken nedenfor?
+  \begin{equation*}
+    \sum_{n=1}^{\infty}\frac{(5-2x)^n}{n}
+  \end{equation*}
+  \\[-6pt]
+\end{oppgave}
+
+\begin{oppgave}{8}
+  Hva konvergerer rekken
+  \begin{equation*}
+    \sum_{n=2}^{\infty}\frac{(-1)^n\pi^{2n-4}}{(2n-1)!}
+  \end{equation*}
+  til?
+  \\[-6pt]
+\end{oppgave}
+
+
+
+\end{document}
