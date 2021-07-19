@@ -1,0 +1,64 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\newcommand{\V}[1]{\mathbf{#1}}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage[european,americanvoltages]{circuitikz}
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Stigningstall}
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+
+\begin{oppgave}{1}
+Noe med likning for tangentlinje
+\end{oppgave}
+
+\begin{oppgave}{2}
+Finne ut når fikspunktiterasjonen konvergerer.
+\end{oppgave}
+
+\begin{oppgave}{3}
+løse $x=\cos x$ med Newton
+\end{oppgave}	
+
+\begin{oppgave}{4}
+utlede newtons metode
+\end{oppgave}
+
+
+
+\end{document}
