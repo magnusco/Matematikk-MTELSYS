@@ -1,0 +1,116 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\newcommand{\V}[1]{\mathbf{#1}}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage[european,americanvoltages]{circuitikz}
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4101}
+\emnenavn{Matematikk 1 for MTELSYS}
+\title{Areal}
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+Etter fullendt R2 sitter man gjerne igjen med følgende ide:
+
+\begin{tcolorbox}
+INTEGRASJON ER DET MOTSATTE AV DERIVASJON
+\end{tcolorbox}
+
+som de fleste i sitt stille sinn oversetter til:
+
+\begin{tcolorbox}
+INTEGRASJON = ANTIDERIVASJON
+\end{tcolorbox}
+
+Den første av disse er i bunn og grunn riktig, 
+men ikke den andre.
+Det som er riktig å si,
+er at man i mange tilfeller kan antiderivere for å finne integralet.
+
+
+\begin{oppgave}{1}
+Finn arealet avgrenset av $y=x^3$, $y=0$ og $x=1$.
+\end{oppgave}
+
+
+I mange situasjoner er det enten umulig eller urealistisk å antiderivere for å finne integralet. 
+Funksjonen $e^{-x^2}$ har ingen antiderivert som lar seg skrive ned på en pen måte, 
+og andre funksjoner har så kompliserte antideriverte at det ikke er vits i å prøve en gang:
+\begin{figure}[htbp]
+  \begin{center}
+%      \vspace*{-2.4cm}
+	\includegraphics[scale=.80]{integral}
+   % \vspace*{-2.4cm}
+	\end{center}
+\end{figure}
+
+Men det viktigste å skjønne når vi skal forstå integrasjon, 
+er hva en riemannsum er. 
+Disse brukes egentlig til å definere integralet, 
+men kan også brukes til å finne en tilnærming til arealet under grafen.
+
+\begin{oppgave}{2}
+Finn 
+\[
+\int_0^1 e^{-x^2}\; dx
+\]
+\end{oppgave}
+
+Viggo Brun skal ha sagt:
+\begin{tcolorbox}
+Derivasjon er et håndverk, integrasjon er en kunst!
+\end{tcolorbox}
+
+Det han mente å si, 
+var nok at derivasjon er ganske lett (det er bare å bruke noen regneregler),
+mens integrasjon kan være ganske vanskelig. 
+Et tilforlatelig funksjonsuttrykk kan være enten lett, umulig, vanskelig, eller håpløst å antiderivere,
+og det kan være vanskelig å avgjøre hvilken av disse som er tilfelle. 
+Man kan bruke et liv på å trene på antiderivasjon.
+
+\begin{oppgave}{3}
+  Regn ut integralene
+  \begin{equation*}
+    (i) \quad \int_0^{\frac{\pi}{2}} \sqrt{1 + \cos x} \dee x \qquad
+    \qquad (ii) \quad \int\frac{\sin\left( x \right)}{1+\cos\left( x
+      \right)} \dee x.
+  \end{equation*}
+  (Hint: $\cos(2\theta) = 2\cos^2 \theta -1 = 1 - 2 \sin^2 \theta$.)
+\end{oppgave}
+
+
+
+
+
+\end{document}
