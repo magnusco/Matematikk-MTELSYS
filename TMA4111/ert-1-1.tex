@@ -1,0 +1,75 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4111}
+\emnenavn{Matematikk 3 for MTELSYS}
+\title{Lienards likning}
+
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+
+Øvingsopplegget i TMA4111 er organisert i samme ånd som i TTT4203 - hver øving skal gi deg erfaring og trening, 
+samt stimulere til refleksjon. 
+
+
+
+Denne uken skal vi studere Lienards likning
+\[
+\ddot{x}+ f(x)\dot{x}+g(x)x=0.
+\]
+
+
+\begin{oppgave}{1}
+Forklar hvorfor dette ikke er en lineær likning, 
+og skriv om til et førsteordens system.
+\end{oppgave}
+
+Van der Pols likning er et spesialtilfelle av Lienards likning, 
+og ser slik ut:
+\[
+\ddot{x}+ \mu(1-x^2)\dot{x}+x=0.
+\]
+Den ble oppdaget av Balthasar van der Pol (\url{https://en.wikipedia.org/wiki/Balthasar_van_der_Pol}) i forbindelse med arbeid på radiorør,
+men kan også modellere andre ting, for eksempel hjerteslag.
+
+
+\begin{oppgave}{2}
+Skriv et script som løser van der Pols likning numerisk med symplektisk Euler. 
+\end{oppgave}
+
+
+
+
+\end{document}
