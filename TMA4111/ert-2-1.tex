@@ -49,13 +49,16 @@ fouriertransform
 \[
 X(\omega) = \mathcal{F}\left\{ x(t) \right\}=\int_{-\infty}^{\infty} x(t)e^{-i\omega t}\;dt,
 \]
-og laplacetransform
+og ensidig laplacetransform
 \[
-X(s) = \mathcal{L}\left\{ x(t) \right\}=\int_0^{\infty} x(t)e^{-(\sigma + i \omega)t}\; dt.
+X(s)= \mathcal{L}\left\{ x(t) \right\}=\int_0^{\infty} x(t)e^{-st}\; dt.
 \]
-Disse tre dyrene her tar lang tid å forså, 
+der $s=\sigma + i \omega$.
+Disse tre dyrene her tar lang tid å forstå, 
 men er på hver sin måte veldig viktige for analyse av alle slags lineære systemer, 
 ikke bare elektriske.
+Fouriertransform er et spesialtilfelle av laplacetransform (sett $\sigma=0$).
+Konvolusjon er et slags merkelig produkt mellom funksjoner. 
 En av de viktigste tingene å ta stilling til i starten,
 er hva som kan puttes inn i disse dyrene. 
 
