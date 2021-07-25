@@ -1,0 +1,83 @@
+\documentclass[a4paper,norsk,11pt]{interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+% Overskrift
+\emnekode{TMA4111}
+\emnenavn{Matematikk 3 for MTELSYS}
+\title{Fouriertransform}
+
+
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+Det går an å vise at dersom $x$ er et signal som oppfører seg pent (ikke tenk så mye på hva det vil si inntil videre), 
+og
+\[
+X(\omega) = \mathcal{F}\left\{ x(t) \right\}=\int_{-\infty}^{\infty} x(t)e^{-i\omega t}\;dt
+\]
+er
+\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{i\omega t}d\omega.
+\]
+Dette kalles fouriertransform, 
+og er ganske vanskelig å skjønne noe av i begynnelsen. 
+Men fouriertransform er helt ekstremt viktig i både matematikk og anvendelser. 
+Det kan brukes til alt: \url{https://en.wikipedia.org/wiki/Fourier_transform}.
+
+\begin{oppgave}{1}
+Finn fouriertransformen til 
+\[
+f(t)=
+\begin{cases} 
+1 \quad |t|<1 \\
+0 \quad |t|\geq 1
+\end{cases}
+\]
+\end{oppgave}
+
+\begin{oppgave}{2}
+Finn fouriertransformen til 
+\[
+f(t)=
+\begin{cases} 
+a \quad |t|<1/a \\
+0 \quad |t|\geq 1/a
+\end{cases}
+\]
+\end{oppgave}
+
+
+\begin{oppgave}{3}
+Finn fouriertransformen til $f(t)=e^{-t^2}$.
+\end{oppgave}
+
+\end{document}
