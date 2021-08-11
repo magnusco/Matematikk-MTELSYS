@@ -1,0 +1,253 @@
+
+% Morten -- jeg skriver bare en veldig plain tex-fil her, så kan du gjøre det du vil med innholdet etterpå.
+
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+\usepackage[norsk]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{scrextend}
+\usepackage{mdframed}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{mdframed}
+\usepackage[american]{circuitikz}
+\usepackage[small]{titlesec}
+
+\hypersetup{colorlinks=true, 
+    linkcolor=blue, 
+    filecolor=magneta,
+    urlcolor=cyan,
+    citecolor=black,
+}
+
+\theoremstyle{plain}
+\newtheorem{teorem}{Teorem}\surroundwithmdframed{teorem}
+
+\theoremstyle{definition}
+\newtheorem{definisjon}[teorem]{Definisjon}
+\newtheorem{eksempel}[teorem]{Eksempel}
+\newtheorem{funfact}[teorem]{Funfact}
+
+\theoremstyle{remark}
+\newtheorem{merknad}[teorem]{Merknad}
+\newtheorem*{bevis}{Bevis}
+
+\newtheorem{oppg}{}
+\newtheorem{innercustomoppg}{}
+\newenvironment{customoppg}[1]
+{\renewcommand\theinnercustomoppg{#1}\innercustomoppg}
+{\endinnercustomoppg}
+
+% Endre på disse etter hvilken notasjon du vil ha.
+\newcommand{\diff}[1]{\mathop{d#1}} 
+\newcommand{\fcn}{x}
+\newcommand{\boldvec}[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand{\expfcn}[1]{e^{#1}}
+\newcommand{\bigabs}[1]{\big|#1\big|}
+\newcommand{\biggabs}[1]{\bigg|#1\bigg|}
+\newcommand{\bigparanth}[1]{\big(#1\big)}
+\newcommand{\biggparanth}[1]{\bigg(#1\bigg)}
+\newcommand{\bigbrac}[1]{\big[#1\big]}
+\newcommand{\biggbrac}[1]{\bigg[#1\bigg]}
+\newcommand{\imagunit}{\mathrm{j}}
+
+\DeclareMathOperator{\imaginary}{Im}
+\DeclareMathOperator{\real}{Re}
+
+
+\title{Førsteordens differensialligninger}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Dette kapitlet gir en introduksjon til differensialligninger. Modellering, motivasjon.
+
+Grunnen til at vi først tar for oss lineær teori er at vi allerede har et godt grunnlg i lineær algebra, og at lineære systemer er en ganske analog utvidelse at lineære ligninger. Disse er svært nyttige i elektroteknikk.
+
+Oversikt over notatet.
+
+\section*{Eksempler, del 1}
+Vi begynner med å se på noen eksempler der fysiske situasjoner kan modelleres ved hjelp av differensialligninger. Mot slutten av dette notatet skal vi komme tilbake
+til disse.
+
+\begin{eksempel} \label{eks:krets_1}
+    Følgende figur viser en (RL-)krets med en spenningskilde, en motstand og en spole.
+    \begin{center}
+        \begin{circuitikz}
+          \draw
+          (0,0)
+          to[american voltage source, voltage dir=old, l={$V_s$}, i^={$I(t)$}] (0,3)
+          to[european resistor, l_ = $R$] (3,3)
+          to (3,0)
+          to[cute inductor, l_ = $L$] (0, 0);
+        \end{circuitikz}
+      \end{center}
+      Ved Ohms lov er spenningsfallet over motstanden lik $RI$ og spenningsfallet over spolen er $L\dot{I}$. Kirchhoffs spenningslov, som sier at summen av elektriske potensialforskjeller over en lukket strømsløyfe må utligne hverandre, gir dermed at
+      \begin{equation*}
+          \dot{I} + \frac{R}{L} I = \frac{V_s}{L}.
+      \end{equation*}
+\end{eksempel}
+
+\begin{eksempel} \label{eks:newtons_kj_lov_1}
+    Newtons kjølelov sier at endringen i temperaturen til et objekt er direkte proporsjonal med temperaturforskjellen mellom objektet og omgivelsene. Sindre skal steke ribbe til julaften. Han finner ut at temperaturen kan bestemmes ved å løse
+    \begin{equation*}
+        \dot{T} = k(T - T_0).
+    \end{equation*}
+\end{eksempel}
+
+\begin{eksempel} \label{eks:populasjon_1}
+    I studet av populasjonsvekst møter man ofte den såkalt logistiske ligningen
+    \begin{equation*}
+        \dot{x}(t) = A \fcn(t) - B (\fcn(t))^2,
+    \end{equation*}
+    hvor $\fcn(t)$ beskriver en populasjonsstørrelse som funksjon av tid. Dersom vi setter $B = 0$ får vi en malthusiansk modell, etter den britiske samfunnsøkonomen Thomas Robert Malthus, som gir eksponensiell populasjonsvekst. Senere skal vi se at leddet $-B x^2$ begrenser veksten i populasjonsmodellen.
+\end{eksempel}
+
+
+\section*{En kort oversikt}
+
+En differensialligning er en relasjon mellom en funksjon og dens deriverte. Vi skal her jobbe utelukkende med ordinære differensialligninger, altså ligninger for funksjoner med bare én ukjent Motstykket er partielle differensialligninger, hvor man har funksjoner av flere variable samtidig.
+
+Dersom funksjonen som inngr i ligningen er en vektorfunksjon med $n$ komponenter
+\begin{equation*}
+    \boldsymbol{x}(t) =
+    \begin{pmatrix}
+        x_1(t) \\
+        x_2(t) \\
+        \vdots \\
+        x_n(t)
+    \end{pmatrix}
+\end{equation*}
+har vi et ligningssystem av dimensjon $n$, helt i samsvar med det vi har sett tidligere i lineær algebra. Dett blir viktig senere, men vi skal her nøye oss med skalare funksjoner $\fcn(t)$ og dens deriverte.
+
+Med ordenen til en differensialligning mener vi den høyeste deriverte som inngår i ligningen. Den deriverte skriver vi som $\dot{x}(t)$.
+
+
+Så vi står igjen med denne, som vi skal studere her.
+\begin{equation} \label{eq:generell_forsteordens}
+    \dot{x}(t) = f(\fcn(t), t).
+\end{equation}
+
+Det er nyttig her å huske på hva det er vi egentlig gjør. Ligning \eqref{eq:generell_forsteordens} er bare grensen av ligningen
+\begin{equation*}
+    \frac{\fcn(t + h) - \fcn(t)}{h} = f(\fcn(t), t)
+\end{equation*}
+med $h \rightarrow 0$. På den annen side,
+\begin{equation*}
+    \fcn(t) = \int f(\fcn(t), t) \diff{t}.
+\end{equation*}
+Disse gir opphav til numeriske metoder som vi skal se på senere. Dette reflekterer bare at differensialligninger kan ses i mange lys, og det er lurt å huske på hvordan den deriverte og den integrerte egentlig er definert.
+
+Med et initialverdiproblem mener vi en differensialligning med en tilhørende initialbetingelse,
+\begin{equation*}
+    \dot{x}(t) = f(\fcn(t), t), \qquad x(t_0) = x_0.
+\end{equation*}
+
+Vi sier at $\fcn(t)$ løser ligning \eqref{eq:generell_forsteordens} dersom den er kontinuerlig deriverbar på et åpent intervall $I = (a, b)$ og tilfredsstiller ligningen på dette intervallet.
+
+Dersom vi har et uttrykk for løsningen $\fcn(t)$ i henhold til vår forståelse av en løsning som ovenfor sier vi at vi ofte at vi har en analytisk løsning, eller en eksakt løsning. Dette står i kontrast til numeriske løsninger, som er tilnærminger.
+
+
+\section*{Lineære ligninger}
+
+En førsteordens lineær differensialligning kan skrives på standard form som
+\begin{equation} \label{eq:linear_forsteordens}
+    \dot{\fcn}(t) + p(t) \fcn(t) = q(t).
+\end{equation}
+Dersom $r(t) = 0$ sier vi at ligningen er homogen.
+
+Vi viser nå hvordan den inhomogene ligningen \eqref{eq:linear_forsteordens} kan løses generelt. Multipliser me den funksjon $\expfcn{P(t)}$ på begge sider,
+\begin{equation*}
+    \dot{\fcn}(t) \expfcn{P(t)} + \fcn(t) p(t) \expfcn{P(t)} = q(t) \expfcn{P(t)},
+\end{equation*}
+hvor $P(t)$ er en antiderivert til $p(t)$. Ved kjerneregelen for derivasjon er venstre side nå lik den deriverte av $\fcn(t) \expfcn{P(t)}$. Integrerer vi ligningen med hensyn på $t$ får vi dermed
+\begin{equation*}
+    \fcn(t) \expfcn{P(t)} = \int q(t) \expfcn{P(t)} \diff{t} + C, 
+\end{equation*}
+hvor $C$ er en vilkårlig integrasjonskonstant. Løsningen til ligningen er dermed
+\begin{equation} \label{eq:generell_losn_linear}
+    \fcn(t) = \expfcn{-P(t)} \biggparanth{\int q(t) \expfcn{P(t)} \diff{t} + C}, \qquad P(t) = \int p(t) \diff{t}.
+\end{equation}
+
+\begin{eksempel}
+    Vi vet at ligningen
+    \begin{equation*}
+        \dot{\fcn}(t) + a \fcn(t) = 0
+    \end{equation*}
+    har løsning
+    \begin{equation*}
+        \fcn(t) = \expfcn{-a t}.
+    \end{equation*}
+    Dette stemmer overens med \eqref{eq:generell_losn_linear}.
+\end{eksempel}
+
+\begin{eksempel}
+    \begin{equation*}
+        \dot{\fcn}(t) - 2\fcn(t) = 3\expfcn{t}.
+    \end{equation*}
+    \begin{equation*}
+        \dot{\fcn}(t) \expfcn{-2t} - 2\fcn(t) \expfcn{-2t} = 3\expfcn{t} \expfcn{-2t}
+    \end{equation*}
+    \begin{equation*}
+        \frac{\diff{}}{\diff{t}} \bigparanth{\fcn(t) \expfcn{-2t}} = 3\expfcn{t} \expfcn{-2t}
+    \end{equation*}
+    Ved å integrere får man
+    \begin{equation*}
+        x(t) = \expfcn{2t} \biggparanth{}
+    \end{equation*}
+\end{eksempel}
+
+
+Observasjon om homogen/inhomogen løsning med ubestemt konstant.
+
+\begin{teorem}
+    Eksistens og unikhet.
+\end{teorem}
+
+\section*{Ikkelineære ligninger}
+
+Ofte svært vanskelig finne formler for, løse analytisk.
+
+Separable ligninger.
+
+Fasediagram i en dimensjon. Motiverende eksempel.
+
+Tredje metode: numerikk.
+
+
+\section*{Numeriske metoder}
+
+Intro, arbeidshest.
+
+Euler ekslisitt, implisitt.
+
+Trapesmetoden.
+
+Heuns metode.
+
+Midtpunktmetoden.
+
+
+\section*{Eksemer del 3}
+
+
+\section*{Feilanalyse og stabilitet}
+
+Taylor til å finne feil.
+
+Stabilitet. Implisitte vs eksplisitte metoder.
+
+
+
+\end{document}
