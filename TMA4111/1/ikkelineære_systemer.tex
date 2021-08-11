@@ -16,6 +16,7 @@
 \usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{patterns,decorations.pathmorphing}
+\usetikzlibrary{arrows.meta}
 \usepackage{pgfplots}
 \usepackage{array}
 \usepackage{mdframed}
@@ -71,16 +72,16 @@
 \begin{document}
 \maketitle
 
-% Dette kapitlet gir en introduksjon til dynamiske systemer. Først ser vi på hvorfor vi ikke bare kan finne formler for løsninger. Skillet mellom lineære og ikkelineære systemer er ganske viktig. Vi har god teori for lineære systemer og løsninger kan finnes ganske greit. For ikkelineære systemer kan man som regel ikke finne analystiske løsninger, og vi må bruke andre metoder. Vi har tidligere sett på analyse av faseplan og numerikk som alternative måter å forstå differensialligninger, og disse skal nå bli enda viktigere for oss.
+Dette kapitlet gir en introduksjon til dynamiske systemer. Mens vi tidligere har sett at det finnes god teori og fine formler for lineære systemer gjelder ikke dette for ikkelineære systemer. For ikkelineære systemer kan man som regel ikke finne analystiske løsninger, og vi må bruke andre metoder. Disse inkluderer hovedsaklig kvalitative argumenter i fasediagrammet og numerisk analyse.
 
 \begin{eksempel}
-    Som et eksempel på at kvalitative argumenter noen ganger kan være mer nyttig enn eksakte formler begynner vi med å betrakte ligningen
+    Som et eksempel på at forståelse noen ganger kan være mer nyttig enn eksakte formler begynner vi med å betrakte ligningen
     \begin{equation} \label{eks:motiverende_eksempel}
         \dot{\fcn}(t) = \sin(\fcn(t)).
     \end{equation}
     Her er $x(t)$ en funksjon av variabelen $t$, og $\dot{x}$ er den deriverte av funksjonen. Dette er en ikkelineær førsteordens differensialligning. Løsningen kan vi finne ved separasjon. Først skriver vi ligningen på formen
     \begin{equation*}
-        \frac{1}{\sin(\fcn(t))} \frac{\diff{\fcn(t)}}{\diff{t}} = 1
+        \frac{1}{\sin(\fcn(t))} \frac{\diff{\fcn(t)}}{\diff{t}} = 1.
     \end{equation*}
     Nå kan vi bruke formelen
     \begin{equation*}
@@ -96,10 +97,7 @@
     \end{equation}
     Selv om dette er en av få ikkelineære differensialligningen man kan finne analytisk løsning til var denne utregningen vanskelig, og enda vanskeligere er det å tolke løsningen \eqref{eq:motiverende_eksempel_losn}. Kan vi forstå ligningen på andre måter?
     
-    Vi kan tenke oss at $\fcn(t)$ beskriver posisjonen til en partikkel som beveger seg langs den reelle tallinjen. Ligning \eqref{eks:motiverende_eksempel} gir da at hastigheten til partikkelen er avhengig av posisjonen til partikkelen gjennom en sinus-relasjon.
-
-
-    Vi skisserer det endimensjonale fasediagrammet til funksjonen, med sinusfunksjonen som hjelp.
+    Vi kan tenke oss at $\fcn(t)$ beskriver posisjonen til en partikkel som beveger seg langs den reelle tallinjen. Ligning \eqref{eks:motiverende_eksempel} gir da at hastigheten til partikkelen er avhengig av en sinusfunksjon med partikkelens posisjon som argument. Under er en skissere av det endimensjonale fasediagrammet til ligningen.
     \begin{center}
         \begin{tikzpicture}
             \pgfplotsset{ticks=none},
@@ -115,19 +113,72 @@
                 ylabel={$\dot{\fcn}(t)$},
                 xlabel={$\fcn(t)$}
                 ]
-              \addplot [domain=-3*pi:3*pi, samples=100, smooth, very thick] { sin(x) };
+                \addplot [domain=-3*pi:3*pi, samples=100, smooth, thick] { sin(0.8*x) };
+
+                \draw[-{Latex[length=3mm]}, very thin] (axis cs:-2*pi/0.8,0) -- (axis cs:-3*pi/1.6,0);
+                \draw[-{Latex[length=3mm]}, very thin] (axis cs:0,0) -- (axis cs:-pi/1.6,0);
+                \draw[-{Latex[length=3mm]}, very thin] (axis cs:2*pi/0.8,0) -- (axis cs:3*pi/1.6,0);
+                \draw[-{Latex[length=3mm]}, very thin] (axis cs:0,0) -- (axis cs:pi/1.6,0);
+                
+                \node[circle, draw=black, fill=white, inner sep=0pt, minimum size=4pt] at (axis cs:-2*pi/0.8,0) {};
+                \node[circle, draw=black, fill=black, inner sep=0pt, minimum size=4pt] at (axis cs:-pi/0.8,0) {};
+                \node[circle, draw=black, fill=white, inner sep=0pt, minimum size=4pt] at (axis cs:0,0) {};
+                \node[circle, draw=black, fill=black, inner sep=0pt, minimum size=4pt] at (axis cs:pi/0.8,0) {};
+                \node[circle, draw=black, fill=white, inner sep=0pt, minimum size=4pt] at (axis cs:2*pi/0.8,0) {};
+                
             \end{axis}
           \end{tikzpicture}
     \end{center}
+    I punktene der sinusfunksjonen er positiv er hastigheten til partikkelen positiv, der den er negativ er hastigheten negativ, og der funksjonen krysser null er også hastigheten til partikkelen null. Punktene hvor hastigheten er null, og dermed partikkelen er i ro, kalles likevektspunkter. Vi klassifiserer gjerne likevektspunktene som enten stabile eller ustabile, avhengig av hva som skjer dersom en partikkel i et likevektspunkt får et lite dytt på seg. De ustabile likevektspunktene er tegnet inn som hvite punkter mens de stabile er svarte.
     
-    I punktene der sinusfunksjonen er positiv er hastigheten til partikkelen positiv, der den er negativ er hastigheten negativ, og der funksjonen krysser null forsvinner også hastigheten til partikkelen. Disse punktene kalles likevektspunkter for ligningen. Ut fra diagrammet kan vi se hvordan partikkelen vil bevege seg. Dersom den begynner i posisjon $x_0$ beveger seg altså til et likevektspunkt til høyre eller til venstre, avhengig at om hastigheten er positiv eller negativ.
+    Ut fra diagrammet kan vi se hvordan partikkelen vil bevege seg. Dersom den begynner i posisjon $x_0$ beveger den seg til et likevektspunkt til høyre eller til venstre, avhengig at om hastigheten er positiv eller negativ.
 \end{eksempel}
 
 Eksempel \ref{eks:motiverende_eksempel} viser hvordan det ofte kan være nyttig å skissere faseplanet til en ligning i stedet for å lete etter eksakte løsninger. På denne måten kan vi få mer informasjon ut av systemet for mindre arbeid.
 
 
 \section*{Todimensjonale fasediagram}
-Vi skal nå se på todimensjonale fasediagram, samtidig som vi introduserer litt terminologi.
+Vi skal nå se litt på todimensjonale fasediagram. For lineære systemer på formen
+\begin{equation*}
+    \boldvec{\dot{x}}(t) = A \boldvec{x}(t)
+\end{equation*}
+kan man, med litt erfaring, skissere fasediagrammet bare ved å se på egenskapene til matrisen $A$ i systemet. Vi ser nå på noen eksempler på dette.
+
+\begin{eksempel}
+    Betrakt systemet
+    \begin{equation*}
+        \dot{x} = x - 5 y, \qquad \dot{y} = x - y.
+    \end{equation*}
+    Matrisen
+    \begin{equation*}
+        \begin{pmatrix}
+            1 & -5 \\
+            1 & -1
+        \end{pmatrix}
+    \end{equation*}
+    har komplekse egenverdier $\lambda_1 = 2 \imagunit$ og $\lambda_2 = -2 \imagunit$. Vi får derfor sirkelbaner i faseplanet, som vist under.
+    \begin{center}
+        \includegraphics[scale=0.5]{phase_plane_2.png}
+    \end{center}
+\end{eksempel}
+
+\begin{eksempel}
+    Se nå på systemet
+    \begin{equation*}
+        \dot{x} = x + y, \qquad \dot{y} = x - 2y.
+    \end{equation*}
+    Matrisen
+    \begin{equation*}
+        \begin{pmatrix}
+            1 & 1 \\
+            1 & -2
+        \end{pmatrix}
+    \end{equation*}
+    har reelle egenverdier $\lambda_1 = \frac{1}{2} (-1 - \sqrt{13})$ og $\lambda_2 = \frac{1}{2} (-1 + \sqrt{13})$ med tilhørende reelle egenvektorer. Vi får da en sadel i faseplanet, bestemt av linjene til egenverdiene for systemt.
+    \begin{center}
+        \includegraphics[scale=0.5]{phase_plane_3.png}
+    \end{center}
+\end{eksempel}
 
 \begin{eksempel} \label{eks:lodd_svingning}
     Vi har tidligere sett at dersom et lodd henger i en fjær som vist under kan svingningen til loddet beskrives av
@@ -264,13 +315,6 @@ Vi skal nå se på todimensjonale fasediagram, samtidig som vi introduserer litt
 \end{eksempel}
 
 I fasediagrammet plotter vi løsningene mot hverandre, i motsetning til å plotte dem hver for seg som funksjoner av tid. Tiden $t$ er dermed implisitt i diagrammet. Hvert punkt i planet tilsvarer én tilstand systemet kan befinne seg i, hvor både posisjon og hastighet er bestemt. Kurver i fasediagrammet er spesielle løsninger til systemet, hvor konstantene i den generelle løsningen er bestemt av initialbetingelser.
-
-Når man får mer erfaring med fasediagram kan man skissere dem bare ut fra egenvektorene og egenverdiene til matrisen $A$ i systemet
-\begin{equation*}
-    \boldvec{\dot{x}}(t) = A \boldvec{x}(t).
-\end{equation*}
-Noen oppgaver er gitt senere i dette notatet.
-
 
 \section*{Grensesykler}
 

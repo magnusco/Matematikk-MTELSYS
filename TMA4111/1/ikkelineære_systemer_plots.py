@@ -100,8 +100,8 @@ def van_der_pol():
 
 if __name__ == "__main__":
     phase_plane_1()
-    # phase_plane_2()
-    # phase_plane_3()
+    phase_plane_2()
+    phase_plane_3()
     # phase_plane_4()
     phase_plane_radial()
     van_der_pol()
