@@ -98,10 +98,39 @@ def van_der_pol():
     return 0
 
 
+def van_der_pol_impl_euler():
+    mu = 1
+    T = 20
+    N = 2000
+    h = T / N
+    time = np.linspace(0, T, N)
+
+    x_dot = lambda x, y, mu : y
+    y_dot = lambda x, y, mu : mu * (1-x**2) * y - x
+    
+    x = np.zeros(N)
+    y = np.zeros(N)
+    x[0], y[0] = 0, 4
+
+    for i in range(0, N - 1):
+        x[i + 1] = x[i] + h * x_dot(x[i], y[i], mu)
+        y[i + 1] = y[i] + h * y_dot(x[i+1], y[i], mu)
+
+    plt.plot(x, y, 'k')
+    plt.axis("square")
+    plt.xlim([-4, 4])
+    plt.grid(True)
+    plt.savefig("TMA4111/1/van_der_pol_impl_euler.png")
+    plt.close()
+    return 0
+
+
 if __name__ == "__main__":
-    phase_plane_1()
-    phase_plane_2()
-    phase_plane_3()
+    # phase_plane_1()
+    # phase_plane_2()
+    # phase_plane_3()
     # phase_plane_4()
-    phase_plane_radial()
-    van_der_pol()
+    # phase_plane_radial()
+    # van_der_pol()
+
+    van_der_pol_impl_euler()

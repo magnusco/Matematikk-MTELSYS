@@ -316,9 +316,9 @@ kan man, med litt erfaring, skissere fasediagrammet bare ved å se på egenskape
 
 I fasediagrammet plotter vi løsningene mot hverandre, i motsetning til å plotte dem hver for seg som funksjoner av tid. Tiden $t$ er dermed implisitt i diagrammet. Hvert punkt i planet tilsvarer én tilstand systemet kan befinne seg i, hvor både posisjon og hastighet er bestemt. Kurver i fasediagrammet er spesielle løsninger til systemet, hvor konstantene i den generelle løsningen er bestemt av initialbetingelser.
 
-\section*{Grensesykler}
+\section*{Grensesykluser}
 
-Vi går nå over til å studere systemer som ikke er lineære. I disse kan man få helt andre fenomener enn de vi tidligere har sett i lineære systemer. Her kommer også analyse av faseplan til sin rett, i og med at vi som regel ikke kan løse slike systemer analytisk. La oss først se på to situasjoner hvor ikkelineære ligninger oppstår.
+Vi går nå over til å studere systemer som ikke er lineære. I disse kan man få helt andre fenomener enn de vi tidligere har sett i lineære systemer. Her kommer analyse av faseplan til sin rett, i og med at vi som regel ikke kan løse slike systemer analytisk. La oss først se på to situasjoner hvor ikkelineære ligninger oppstår.
 
 \begin{eksempel}    
     I Eksempel \ref{eks:lodd_svingning} så vi på fasediagrammet til ligningen
@@ -332,37 +332,33 @@ Vi går nå over til å studere systemer som ikke er lineære. I disse kan man f
     der $\gamma(x)$ gir friksjon som funksjon av posisjonen til partikkelen.
 \end{eksempel}
 
-
 \begin{eksempel}
     Betrakt følgende krets.
     \begin{center}
         \begin{circuitikz}
           \draw
           (0,0)
-          to[american voltage source, voltage dir=old, l={$V_s$}, i^={$I(t)$}] (0,3)
-          to[european resistor, l_ = ${V=f(I)}$] (3,3)
-          to (3,0)
+          to[short, i=$I(t)$] (0,3)
+          to[european resistor, l = ${V=f(I)}$] (3,3)
+          to[capacitor, l = $C$] (3,0)
           to[cute inductor, l_ = $L$] (0, 0);
         \end{circuitikz}
       \end{center}
-
-
-
+      Her har vi satt inn en ikkelineær motstand som oppfører seg i henhold til $V = f(I)$, der $f$ er en funksjon. Balanserer vi spenningstapet over kretsen finner vi da at
+      \begin{equation*}
+          L \dot{I} + f(I) + \frac{1}{C} \int I \diff{t} = 0,
+      \end{equation*}
+      og derivasjon gir
+      \begin{equation*}
+          L \ddot{I} + \frac{\diff{f}}{\diff{I}} \dot{I} + \frac{I}{C} = 0.
+      \end{equation*}
+      Dette systemet er ikkelineært dersom funksjonen $f$ ikke er lineær i $I$.
 \end{eksempel}
 
-
-Vi skal se på ett av disse her, nemlig grensesykler. En grensesyklus er en lukket og isolert bane i et fasediagram. Systemer som inneholder grensesykler finner vi overalt rundt oss. Noen eksempler er kretsen i en digital klokke, et hjerte som slår, eller balansen mellom rovdyr og byttedyr.
+I begge eksemplene over kan det oppstå svingninger som opprettholdes av seg selv og ikke dør ut (i fjæren fordi vi dytter på den, og i kretsen fordi den ikkelineære motstanden nå også har lov til å tilfære systemet energi). Dette skal vi kalle grensesykluser. En grensesyklus er en lukket og isolert bane i et fasediagram. Systemer som inneholder grensesykluser finner vi overalt rundt oss. Noen eksempler er kretsen i en digital klokke, et hjerte som slår, eller balansen mellom rovdyr og byttedyr.
 
 \begin{eksempel}
-    Dersom vi bruker polarkoordinater er det ikke vanskelig å konstruere systemer som har grensesykler. Gitt ved
-    \begin{equation*}
-        x = r \cos(\theta), \qquad y = r \sin(\theta).
-    \end{equation*}
-    Deriverer vi får man
-    \begin{equation*}
-        \dot{r} = \frac{x\dot{x} + y \dot{y}}{r}, \qquad \dot{\theta} = \frac{x\dot{y} - \dot{x}y}{r^2}.
-    \end{equation*}
-    Ta for eksempel
+    Dersom vi bruker polarkoordinater er det ikke vanskelig å konstruere systemer som har grensesykluser. La oss se på systemet
     \begin{equation*}
         \begin{pmatrix}
             \dot{r} \\
@@ -372,53 +368,87 @@ Vi skal se på ett av disse her, nemlig grensesykler. En grensesyklus er en lukk
         \begin{pmatrix}
             r(1-r^2) \\
             1
-        \end{pmatrix}
+        \end{pmatrix},
+    \end{equation*} 
+    der
+    \begin{equation*}
+        x = r \cos(\theta), \qquad y = r \sin(\theta),
     \end{equation*}
-    hvor $r$ er radiusen fra origo i planet og $\theta$ beskriver vinkelen fra den horisontale aksen. Siden $r(1-r^2)$ har nullpunkt i $r = 1$ har vi en grensesyklus i $r = 1$.
+    og relasjonen til kartesiske koordinater er dermed
+    \begin{equation*}
+        \dot{r} = \frac{x\dot{x} + y \dot{y}}{r}, \qquad \dot{\theta} = \frac{x\dot{y} - \dot{x}y}{r^2}.
+    \end{equation*}
+    Siden $r(1-r^2)$ har nullpunkt i $r = 1$ har vi en grensesyklus i $r = 1$. Dette kan vi også se i fasediagrammet for ligningen, slik som vist under.
     \begin{center}
         \includegraphics[scale=0.5]{phase_plane_radial.png}
     \end{center}
+    Denne grensesyklusen er stabil, siden pilene i nærheten av syklusen peker inn mot syklusen.
 \end{eksempel}
 
-\begin{eksempel}
-    Krets for Van der Pol.
-    \begin{center}
-        \includegraphics[scale=0.5]{van_der_pol.png}
-    \end{center}
-\end{eksempel}
-
-Vi trenger likevel ikke å bruke polarkoordinater for å forstå hvordan grensesykler kan oppstå. Tenk nå på eksempel \ref{eks:lodd_svingning}, hvor vi hadde et lodd som svinget opp og ned i en fjær. Siden det er friksjon i systemet vil loddet til slutt stoppe av seg selv. Men hva vis vi begynner å dytte loddet litt oppover i hver svingning? Da vil vi ha tilført kraft i systemet, og vi kan se for oss at svingningen vil kunne fortsette så lenge vi har lyst til å sitte å dytte på loddet.
-
-
+En ganske generell familie av ikkelineære ligninger er Lienard-ligningen, gitt ved
 \begin{equation} \label{eq_lienard}
     \ddot{x} + f(x) \dot{x} + g(x) = 0.
 \end{equation}
+Vi skal nå se på et resultat som lar oss bestemme når systemer beskrevet av denne ligningen har en gresesyklus.
 
-\begin{teorem}[Lienard's teorem]
-    Dersom $f$ og $g$ tilfredsstiller følgende kriterier.
+\begin{teorem}[Lienard's teorem] \label{thm:lienard}
+    Anta at funksjonene $f$ og $g$ tilfredsstiller følgende kriterier.
     \begin{enumerate}
         \item[(i)] $f$ og $g$ er kontinuerlig derivarbare.
         \item[(ii)] $g$ er en odde funksjon.
         \item[(iii)] $g(x) > 0$ for $x > 0$.
         \item[(iv)] $f$ er en jevn funksjon.
-        \item[(v)] Funksjonen $F(x) = \int_0^x f(u) \diff{u}$ har nøyaktig ett nullpunkt $x = a$ for positive $x$. Videre er $F(x) < 0$ på $0 < x < a$ og $F(x) > 0$, $F'(x) \leq 0$ på $x > a$, med $F(x) \rightarrow \infty$ når $x \rightarrow \infty$.
+        \item[(v)] Funksjonen $F(x) = \int_0^x f(u) \diff{u}$ har nøyaktig ett nullpunkt $x = a$ for $x > 0$. Videre er $F(x) < 0$ på $0 < x < a$ og $F(x) > 0$, $F'(x) \geq 0$ på $x > a$, med $F(x) \rightarrow \infty$ når $x \rightarrow \infty$.
     \end{enumerate}
-    Da har Lienard-systemet en unik stabil grensesyklus rundt origo.
+    Da har Lienards ligning en unik stabil grensesyklus rundt origo.
 \end{teorem}
 
 \begin{eksempel}
     Vi sjekker betingelsene for Van der Pol-ligningen
     \begin{equation*}
-        \ddot{x} - \mu (1 - x^2) \dot{x} + x = 0.
+        \ddot{x} - \mu (1 - x^2) \dot{x} + x = 0,
     \end{equation*}
-    Merk at denne er et spesialtilfelle av kretsen over.
+    med $\mu > 0$. Funksjonen $f(x) = -\mu (1 - x^2)$ er jevn og kontinuerlig deriverbar, mens funksjonen $g(x) = x$ er odde, større enn null for positive $x$, og kontinuerlig deriverbar. Vi har altså oppfyllt kravene (i)-(iv) fra Teorem \ref{thm:lienard}. Videre har funksjonen
+    \begin{equation*}
+        F(x) = \int_0^x -\mu(1-u^2) \diff{u} = \mu \frac{1}{3} x (x^2-3)
+    \end{equation*}
+    nøyaktig ett positivt nullpunkt i $a = \sqrt{3}$ for positive $x$, og vi har også at $F(x) > 0$, $F'(x) \geq 0$ for $x > \sqrt{3}$. Vi konkluderer med at ligningen har en stabil grensesyklus om origo. Dette kan vi også se ved å plotte fasediagrammet for systemet, slik som vist under.
+    \begin{center}
+        \includegraphics[scale=0.5]{van_der_pol.png}
+    \end{center}
 \end{eksempel}
+
 
 \section*{Numerisk analyse}
 
-Vi skal ikke gå nøye gjennom teori her, men ta noen eksempler som viser at de samme metodene som vi har lært tidligere fungerer her også.
+Vi kan fint løse ikkelineære systemer med de samme numeriske metodene som vi har sett for linære systemer.
 
-Ikkelineært eksempel. Van der Pol.
+\begin{eksempel}
+    Van der Pol-ligningen
+    \begin{equation*}
+        \ddot{x} - \mu (1 - x^2) \dot{x} + x = 0,
+    \end{equation*}
+    kan skrives om til systemet
+    \begin{equation*}
+        \left\{
+            \begin{aligned}
+                & \dot{x} = y, \\
+                & \dot{y} = \mu(1-x^2)y - x.
+            \end{aligned}
+        \right.
+    \end{equation*}
+    Implisitt Euler med steglengde $h$ for dette systemet blir
+    \begin{equation*}
+        \begin{aligned}
+            & x_{i+1} = x_i + h y_i, \\
+            & y_{i+1} = \mu(1-x_{i+1}^2)y_i - x_{i+1}.
+        \end{aligned}
+    \end{equation*}
+    Under vises et plot av den numeriske løsningen. Dette er altså én realisasjon av de banene man kan se i fasediagrammet for ligningen ovenfor, for gitte initialbetingelser.
+    \begin{center}
+        \includegraphics[scale=0.5]{van_der_pol_impl_euler.png}
+    \end{center}
+\end{eksempel}
 
 
 \section*{Oppgaver}
@@ -478,9 +508,9 @@ Ikkelineært eksempel. Van der Pol.
         \ddot{x} + (x^2 - 1) \dot{x} + \tanh(x) = 0
     \end{equation*}
     \begin{itemize}
-        \item[(a)] Vis at den har en unik grensesykel.
+        \item[(a)] Vis at den har en unik grensesyklus.
         \item[(b)] Plot fasediagrammet til ligningen.
-        \item[(c)] Finn numerisk løsning ved hjelp av symplektisk Euler.
+        \item[(c)] Løs ligningen numerisk ved hjelp av symplektisk Euler.
     \end{itemize}
 \end{oppg}
 
@@ -490,9 +520,9 @@ Ikkelineært eksempel. Van der Pol.
         \ddot{x} + \mu (x^4 - 1) \dot{x} + x = 0
     \end{equation*}
     \begin{itemize}
-        \item[(a)] Vis at den har en unik grensesykel dersom $\mu > 0$.
+        \item[(a)] Vis at den har en unik grensesyklus dersom $\mu > 0$.
         \item[(b)] Plot fasediagrammet til ligningen for $\mu = 1$.
-        \item[(c)] Finn numerisk løsning ved hjelp av trapesmetoden.
+        \item[(c)] Løs ligningen numerisk ved hjelp av trapesmetoden.
     \end{itemize}
 \end{oppg}
 
