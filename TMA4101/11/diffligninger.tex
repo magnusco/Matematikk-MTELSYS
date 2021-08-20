@@ -71,15 +71,9 @@
 \begin{document}
 \maketitle
 
-Dette kapitlet gir en introduksjon til differensialligninger. Modellering, motivasjon.
+Dette kapitlet er en introduksjon til førsteordens ordinære differensialligninger. Vi skal se på både lineære og ikkelineære ligninger. For lineære differensialligninger finnes det god teori på eksistens og unikhet av løsninger, flere universelle løsningsteknikker, og vi kan ofte finne analytiske løsninger for disse. Dette gjelder i mye mindre grad for ikkelineære ligninger. For disse er det mye vanskeligere å utlede analytiske løsninger, og vi er avhengig av kvalitative eller numeriske metoder. 
 
-Grunnen til at vi først tar for oss lineær teori er at vi allerede har et godt grunnlg i lineær algebra, og at lineære systemer er en ganske analog utvidelse at lineære ligninger. Disse er svært nyttige i elektroteknikk.
-
-Oversikt over notatet.
-
-\section*{Eksempler, del 1}
-Vi begynner med å se på noen eksempler der fysiske situasjoner kan modelleres ved hjelp av differensialligninger. Mot slutten av dette notatet skal vi komme tilbake
-til disse.
+Vi begynner med å se på noen eksempler hvor differensialligninger oppstår som modeller for fysiske situasjoner. Vi skal komme tilbake til hvordan vi kan løse disse mot slutten av dette notatet.
 
 \begin{eksempel} \label{eks:krets_1}
     Følgende figur viser en (RL-)krets med en spenningskilde, en motstand og en spole.
@@ -93,21 +87,23 @@ til disse.
           to[cute inductor, l_ = $L$] (0, 0);
         \end{circuitikz}
       \end{center}
-      Ved Ohms lov er spenningsfallet over motstanden lik $RI$ og spenningsfallet over spolen er $L\dot{I}$. Kirchhoffs spenningslov, som sier at summen av elektriske potensialforskjeller over en lukket strømsløyfe må utligne hverandre, gir dermed at
+      Ved Ohms lov er spenningsfallet over motstanden lik $RI$ og spenningsfallet over spolen er $L\dot{I}$. Kirchhoffs spenningslov, som sier at summen av potensialforskjellene over en lukket strømsløyfe må utligne hverandre, gir dermed at
       \begin{equation*}
           \dot{I} + \frac{R}{L} I = \frac{V_s}{L}.
       \end{equation*}
+      Dette er et eksempel på en førsteordens lineær differensialligning, hvor den ukjente er funksjonen $I(t)$.
 \end{eksempel}
 
 \begin{eksempel} \label{eks:newtons_kj_lov_1}
-    Newtons kjølelov sier at endringen i temperaturen til et objekt er direkte proporsjonal med temperaturforskjellen mellom objektet og omgivelsene. Sindre skal steke ribbe til julaften. Han finner ut at temperaturen kan bestemmes ved å løse
+    Newtons kjølelov sier at endringen i temperaturen til et objekt er direkte proporsjonal med temperaturforskjellen mellom objektet og omgivelsene. Dersom Sindre skal steke ribbe til julaften kan temperaturen til ribben etter at det er satt inn i ovnen bestemmes ved å løse
     \begin{equation*}
         \dot{T} = k(T - T_0).
     \end{equation*}
+    Proporsjonalitetskonstanten $k$ for systemet må riktignok bestemmes først, men dette kan Sindre selv gjøre på en eller annen måte.
 \end{eksempel}
 
 \begin{eksempel} \label{eks:populasjon_1}
-    I studet av populasjonsvekst møter man ofte den såkalt logistiske ligningen
+    I studet av populasjonsvekst møter man ofte den logistiske ligningen
     \begin{equation*}
         \dot{x}(t) = A \fcn(t) - B (\fcn(t))^2,
     \end{equation*}
@@ -117,46 +113,35 @@ til disse.
 
 \section*{En kort oversikt}
 
-En differensialligning er en relasjon mellom en funksjon og dens deriverte. Vi skal her jobbe utelukkende med ordinære differensialligninger, altså ligninger for funksjoner med bare én ukjent Motstykket er partielle differensialligninger, hvor man har funksjoner av flere variable samtidig.
+En førsteordens differensialligning er en relasjon mellom en funksjon og dens deriverte. Vi skal her jobbe utelukkende med ordinære differensialligninger, altså ligninger for funksjoner med bare én ukjent. Generelt kan vi skrive
+\begin{equation} \label{eq:generell_ekspl_forsteordens}
+    \dot{\fcn}(t) = f(t, \fcn(t)),
+\end{equation}
+hvor $\dot{\fcn}$ er den deriverte av funksjonen $\fcn$ med hensyn på variabelen $t$, og $f$ er en funksjon. Dersom $f$ ikke eksplisitt er avhengig av $t$, altså dersom vi kan skrive $f = f(\fcn(t))$, kaller vi ligningen autonom. Videre, dersom $f$ er en lineær funksjon i $\fcn$ er differensialligningen lineær.
 
-Dersom funksjonen som inngr i ligningen er en vektorfunksjon med $n$ komponenter
-\begin{equation*}
-    \boldsymbol{x}(t) =
-    \begin{pmatrix}
-        x_1(t) \\
-        x_2(t) \\
-        \vdots \\
-        x_n(t)
-    \end{pmatrix}
-\end{equation*}
-har vi et ligningssystem av dimensjon $n$, helt i samsvar med det vi har sett tidligere i lineær algebra. Dett blir viktig senere, men vi skal her nøye oss med skalare funksjoner $\fcn(t)$ og dens deriverte.
+Vi sier at en funksjon $\fcn(t)$ løser ligning \eqref{eq:generell_ekspl_forsteordens} dersom den er kontinuerlig deriverbar på et åpent intervall $I = (a, b)$ og tilfredsstiller ligningen på dette intervallet. 
 
-Med ordenen til en differensialligning mener vi den høyeste deriverte som inngår i ligningen. Den deriverte skriver vi som $\dot{x}(t)$.
+Dersom vi kan finne et eksakt uttrykk ved hjelp av et endelig antall kjente funksjoner (polynomer, trigonometriske funksjoner, eksponensialfunksjoner, osv.) for løsningen til en differensialligning kalles dette ofte en analytisk løsning til ligningen. Dette står i kontrast til numeriske løsninger, som er tilnærminger.
 
-
-Så vi står igjen med denne, som vi skal studere her.
-\begin{equation} \label{eq:generell_forsteordens}
-    \dot{x}(t) = f(\fcn(t), t).
+En differensialligning kommer sjelden uten en historie som vi må ta hensyn til dersom vi skal forstå den. Initialverdiproblemer er et eksempel på dette, hvor differensialligning har en tilhørende initialbetingelse,
+\begin{equation} \label{eq:ivp}
+    \left\{
+        \begin{aligned}
+            & \dot{x} = f(\fcn, t), \\
+            & x(t_0) = x_0.
+        \end{aligned}
+    \right.
 \end{equation}
 
-Det er nyttig her å huske på hva det er vi egentlig gjør. Ligning \eqref{eq:generell_forsteordens} er bare grensen av ligningen
+La oss nå vri å vende litt på initialverdiproblemet gitt i \eqref{eq:ivp}. Husk at derivasjon er definert som en grenseverdi av stigningen til en funksjon. På denne måten er ligning \eqref{eq:generell_ekspl_forsteordens} grensen til ligningen
 \begin{equation*}
-    \frac{\fcn(t + h) - \fcn(t)}{h} = f(\fcn(t), t)
+    \frac{\fcn(t + h) - \fcn(t)}{h} = f(\fcn(t), t),
 \end{equation*}
-med $h \rightarrow 0$. På den annen side,
-\begin{equation*}
-    \fcn(t) = \int f(\fcn(t), t) \diff{t}.
-\end{equation*}
-Disse gir opphav til numeriske metoder som vi skal se på senere. Dette reflekterer bare at differensialligninger kan ses i mange lys, og det er lurt å huske på hvordan den deriverte og den integrerte egentlig er definert.
-
-Med et initialverdiproblem mener vi en differensialligning med en tilhørende initialbetingelse,
-\begin{equation*}
-    \dot{x}(t) = f(\fcn(t), t), \qquad x(t_0) = x_0.
-\end{equation*}
-
-Vi sier at $\fcn(t)$ løser ligning \eqref{eq:generell_forsteordens} dersom den er kontinuerlig deriverbar på et åpent intervall $I = (a, b)$ og tilfredsstiller ligningen på dette intervallet.
-
-Dersom vi har et uttrykk for løsningen $\fcn(t)$ i henhold til vår forståelse av en løsning som ovenfor sier vi at vi ofte at vi har en analytisk løsning, eller en eksakt løsning. Dette står i kontrast til numeriske løsninger, som er tilnærminger.
+med $h \rightarrow 0$. På den annen side kan vi integrere og bruke analysens fundamentalterem til å skrive ligningen på integralform, nemlig
+\begin{equation} \label{eq:integralform}
+    \fcn(t) = \fcn_0 + \int_{t_0}^{t} f(\fcn(\tau), \tau) \diff{\tau}.
+\end{equation}
+Til integralet på høyre side kan vi bruke numeriske approksimasjoner, som gir opphav til numeriske løsningsteknikker for problemet. En annen idé er å prøve fikspunktiterasjon på \eqref{eq:integralform}. Dette gir kanskje en smakebit på at differensiallignniger kan ses på i forskjellige lys, og at det er en stor variasjon av teknikker og triks tilgjengelig.
 
 
 \section*{Lineære ligninger}
@@ -215,6 +200,20 @@ Observasjon om homogen/inhomogen løsning med ubestemt konstant.
     Eksistens og unikhet.
 \end{teorem}
 
+
+Dersom funksjonen som inngår i ligningen er en vektorfunksjon med $n$ komponenter
+\begin{equation*}
+    \boldsymbol{x}(t) =
+    \begin{pmatrix}
+        x_1(t) \\
+        x_2(t) \\
+        \vdots \\
+        x_n(t)
+    \end{pmatrix}
+\end{equation*}
+har vi et ligningssystem av dimensjon $n$, helt i samsvar med det vi har sett tidligere i lineær algebra. Dett blir viktig senere, men vi skal her nøye oss med skalare funksjoner $\fcn(t)$ og dens deriverte.
+
+
 \section*{Ikkelineære ligninger}
 
 Ofte svært vanskelig finne formler for, løse analytisk.
@@ -239,15 +238,10 @@ Heuns metode.
 Midtpunktmetoden.
 
 
-\section*{Eksemer del 3}
+\section*{Oppgaver}
 
-
-\section*{Feilanalyse og stabilitet}
-
-Taylor til å finne feil.
-
-Stabilitet. Implisitte vs eksplisitte metoder.
-
-
+\begin{oppg}
+    Picarditerasjon.
+\end{oppg}
 
 \end{document}

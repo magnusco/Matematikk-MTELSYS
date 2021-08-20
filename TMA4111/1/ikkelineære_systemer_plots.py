@@ -126,11 +126,10 @@ def van_der_pol_impl_euler():
 
 
 if __name__ == "__main__":
-    # phase_plane_1()
-    # phase_plane_2()
-    # phase_plane_3()
+    phase_plane_1()
+    phase_plane_2()
+    phase_plane_3()
     # phase_plane_4()
-    # phase_plane_radial()
-    # van_der_pol()
-
+    phase_plane_radial()
+    van_der_pol()
     van_der_pol_impl_euler()
