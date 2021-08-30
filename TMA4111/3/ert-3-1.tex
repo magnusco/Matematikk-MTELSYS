@@ -1,48 +1,22 @@
-\documentclass[a4paper,norsk,11pt]{interaktiv}
-
-% Importerte pakker
-\usepackage{float}
-\restylefloat{figure}
-\usepackage{ifluatex}
-\usepackage{subfigure}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
-\usepackage{graphicx}
-
-\ifluatex
-  \usepackage{fontspec}
-  \setmainfont{Calibri}
-  \usepackage{unicode-math}
-  \setmathfont{Cambria Math}
-\else
-  \usepackage[utf8]{inputenc}
-\fi
-
-\usepackage{url}
-
-% Underfigurer
-\renewcommand{\thesubfigure}{(\arabic{subfigure})}
-
-% Overskrift
-\emnekode{TMA4111}
-\emnenavn{Matematikk 3 for MTELSYS}
 \title{Fouriertransform}
 
+\input{preamble}
 
 
-% Nye kommandoer
-\newcommand{\dee}{\mathop{}\!{d}}
+
 
 \begin{document}
 \pagenumbering{gobble}
 
 \maketitle
 
-Det går an å vise at dersom $x$ er et signal som oppfører seg pent (ikke tenk så mye på hva det vil si inntil videre), 
+
+
+
+Det går an å vise at dersom $x=x(t)$ er et signal som oppfører seg pent (ikke tenk så mye på hva det vil si inntil videre), 
 og
 \[
-X(\omega) = \mathcal{F}\left\{ x(t) \right\}=\int_{-\infty}^{\infty} x(t)e^{-i\omega t}\;dt
+X(\omega) = \mathcal{F}\left\{ x \right\}=\int_{-\infty}^{\infty} x(t)e^{-i\omega t}\;dt
 \]
 er
 \[
@@ -52,6 +26,9 @@ Dette kalles fouriertransform,
 og er ganske vanskelig å skjønne noe av i begynnelsen. 
 Men fouriertransform er helt ekstremt viktig i både matematikk og anvendelser. 
 Det kan brukes til alt: \url{https://en.wikipedia.org/wiki/Fourier_transform}.
+I et klassisk matematikkemne brukes fouriertransform først og fremst til å løse partielle differensiallikninger.
+
+Vi begynner med å beregne et par transformer. 
 
 \begin{oppgave}{1}
 Finn fouriertransformen til 
@@ -73,11 +50,62 @@ a \quad |t|<1/a \\
 0 \quad |t|\geq 1/a
 \end{cases}
 \]
+Hva skjer med fouriertransformen når $a\to \infty$?
 \end{oppgave}
-
 
 \begin{oppgave}{3}
-Finn fouriertransformen til $f(t)=e^{-t^2}$.
+Finn fouriertransformen til
+\[
+f(t)=e^{-a|t|}
+\]
 \end{oppgave}
+
+I de to neste oppgavene må du nesten anta at inversformelen gjelder, og bruke de foregående oppgavene.
+
+\begin{oppgave}{4}
+Finn fouriertransformen til 
+\[
+f(t)=\frac{\sin t}{t}
+\]
+\end{oppgave}
+
+\begin{oppgave}{5}
+Finn fouriertransformen til
+\[
+f(t)=\frac{1}{t^2+a^2}
+\]
+\end{oppgave}
+
+
+Fouriertransformen er en lineæroperator: 
+\[
+\mathcal{F}\left\{ x+y \right\}=\int_{-\infty}^{\infty} \left(x(t)+y(t)\right)e^{-i\omega t}\;dt=\int_{-\infty}^{\infty} x(t)e^{-i\omega t}\;dt+=\int_{-\infty}^{\infty} y(t)e^{-i\omega t}\;dt=X(\omega) +Y(\omega) 
+\]
+Det er greit nok. 
+En mindre innlysende, 
+men veldig viktig regneregel er:
+
+\begin{tcolorbox}
+\[
+\mathcal{F}(f')=iw\mathcal{F}(f)
+\]
+\end{tcolorbox}
+
+\begin{oppgave}{6}
+Vis dette (hint: delvis integrasjon). Hva må du anta om $x$ for at formelen skal gjelde? 
+\end{oppgave}
+
+%Her er en til:
+%
+%\begin{tcolorbox}
+%\[
+%\mathcal{F}(x(at))=\frac{1}{a}X\left(\frac{\omega}{a}\right).
+%\]
+%\end{tcolorbox}
+
+%\begin{oppgave}{6}
+%Vis dette.
+%\end{oppgave}
+
 
 \end{document}
