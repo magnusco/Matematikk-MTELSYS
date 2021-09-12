@@ -1,4 +1,5 @@
 
+
 % Morten -- jeg skriver bare en veldig plain tex-fil her, så kan du gjøre det du vil med innholdet etterpå.
 
 
@@ -56,7 +57,7 @@
 
 
 % Endre på disse etter hvilken notasjon du vil ha.
-\newcommand{\diff}[1]{\mathop{d#1}} 
+\newcommand{\diff}[1]{\mathop{d#1}}
 \newcommand{\fcn}{x}
 \newcommand{\boldvec}[1]{\boldsymbol{\mathrm{#1}}}
 \newcommand{\expfcn}[1]{e^{#1}}
@@ -68,119 +69,129 @@
 \newcommand{\bigbrac}[1]{\big[#1\big]}
 \newcommand{\biggbrac}[1]{\bigg[#1\bigg]}
 \newcommand{\imagunit}{\mathrm{j}}
+\newcommand{\bigo}[1]{O(#1)}
 
 \DeclareMathOperator{\imaginary}{Im}
 \DeclareMathOperator{\real}{Re}
 
 
-\title{Førsteordens differensialligninger}
+\title{Førsteordens ordinære differensialligninger}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
 
-Dette kapitlet er en introduksjon til førsteordens ordinære differensialligninger. Vi skal se på både lineære og ikkelineære ligninger. For lineære differensialligninger finnes det god teori på eksistens og unikhet av løsninger, flere universelle løsningsteknikker, og vi kan ofte finne analytiske løsninger for disse. Dette gjelder i mye mindre grad for ikkelineære ligninger. For disse er det mye vanskeligere å utlede analytiske løsninger, og vi er avhengig av kvalitative eller numeriske metoder.
+Dette kapittelet gir en introduksjon til førsteordens ordinære differensialligninger. For lineære differensialligninger finnes det god teori og universelle løsningsteknikker, og vi kan ofte finne analytiske løsninger for disse. Dette gjelder i mye mindre grad for ikke-lineære differensialligninger, som det ofte er mye vanskeligere å utlede analytiske løsninger til, og som vi er avhengig av kvalitative eller numeriske metoder for å kunne analysere.
 
-Vi begynner med å se på noen eksempler hvor differensialligninger oppstår som modeller for fysiske situasjoner. Vi skal komme tilbake til hvordan vi kan løse disse mot slutten av dette notatet.
+Vi begynner med å se på noen eksempler hvor differensialligninger oppstår som modeller for fysiske situasjoner, og kommer deretter tilbake til hvordan vi kan finne løsninger og forstå dynamikken bak modellene.
 
 \begin{ex} \label{eks:krets_1}
-    Følgende figur viser en (RL-)krets med en spenningskilde, en motstand og en spole.
+    Følgende figur viser en elektrisk krets med en spenningskilde, en motstand og en spole (RL-krets).
     \begin{center}
         \begin{circuitikz}
             \draw
             (0,0)
-            to[american voltage source, voltage dir=old, l={$V_s$}, i^={$I(t)$}] (0,3)
+            to[american voltage source, voltage dir=old, l={$V_s(t)$}, i^={$I(t)$}] (0,3)
             to[european resistor, l_ = $R$] (3,3)
             to (3,0)
             to[cute inductor, l_ = $L$] (0, 0);
         \end{circuitikz}
     \end{center}
-    Ved Ohms lov er spenningsfallet over motstanden lik $RI$ og spenningsfallet over spolen er $L\dot{I}$. Kirchhoffs spenningslov, som sier at summen av potensialforskjellene over en lukket strømsløyfe må utligne hverandre, gir dermed at
+    Ved Ohms lov er spenningsfallet over motstanden lik $RI$ og spenningsfallet over spolen er $L\dot{I}$, der $I(t)$ er strømmen i kretsen som funksjon av tid. Kirchhoffs spenningslov, som sier at summen av potensialforskjellene over en lukket strømsløyfe må utligne hverandre, gir dermed at
     \begin{equation*}
         \dot{I} + \frac{R}{L} I = \frac{V_s}{L}.
     \end{equation*}
-    Dette er et eksempel på en førsteordens lineær differensialligning, hvor den ukjente er funksjonen $I(t)$.
-\end{ex}
-
-\begin{ex} \label{eks:newtons_kj_lov_1}
-    Newtons kjølelov sier at endringen i temperaturen til et objekt er direkte proporsjonal med temperaturforskjellen mellom objektet og omgivelsene. Dersom Sindre skal steke ribbe til julaften kan temperaturen til ribben etter at det er satt inn i ovnen bestemmes ved å løse
-    \begin{equation*}
-        \dot{T} = k(T - T_0).
-    \end{equation*}
-    Proporsjonalitetskonstanten $k$ for systemet må riktignok bestemmes først, men dette kan Sindre selv gjøre på en eller annen måte.
+    Dette er et eksempel på en førsteordens lineær og ordinær differensialligning, hvor vi er på jakt etter den ukjente funksjonen $I$.
 \end{ex}
 
 \begin{ex} \label{eks:populasjon_1}
-    I studet av populasjonsvekst møter man ofte den logistiske ligningen
+    I studiet av populasjonsvekst møter man ofte den logistiske ligningen
     \begin{equation*}
         \dot{\fcn}(t) = A \fcn(t) - B (\fcn(t))^2,
     \end{equation*}
-    hvor $\fcn(t)$ beskriver en populasjonsstørrelse som funksjon av tid. Dersom vi setter $B = 0$ får vi en malthusiansk modell, etter den britiske samfunnsøkonomen Thomas Robert Malthus, som gir eksponensiell populasjonsvekst. Senere skal vi se at leddet $-B \fcn^2$ begrenser veksten i populasjonsmodellen.
+    hvor $\fcn(t)$ beskriver en populasjonsstørrelse som funksjon av tid. Dersom vi setter $B = 0$ får vi en malthusiansk modell, etter den britiske samfunnsøkonomen Thomas Robert Malthus. Rundt slutten av 1700-tallet hevdet Malthus at befolkningen i Europa ville øke eksponentielt samtidig som matproduksjonen ville øke lineært, noe som ville føre til befolkningskollaps gjennom sultkatastrofer og epidemier. Senere skal vi se at leddet $-B \fcn^2$ begrenser veksten i populasjonsmodellen, og bøter på Malthus' dystre fremtidsutsikter.
 \end{ex}
 
 
 \section*{En kort oversikt}
 
-En førsteordens differensialligning er en relasjon mellom en funksjon og dens deriverte. Vi skal her jobbe utelukkende med ordinære differensialligninger, altså ligninger for funksjoner med bare én ukjent. Generelt kan vi skrive
+En førsteordens differensialligning er en relasjon mellom en (ukjent) funksjon og dens første deriverte. Vi skal i dette notatet bare jobbe med ordinære differensialligninger (forkortet som ODE (ordinary differential equation)); ligninger for funksjoner av én variabel. Generelt skal vi skrive førsteordens ODEer på formen
 \begin{equation} \label{eq:generell_ekspl_forsteordens}
     \dot{\fcn}(t) = f(t, \fcn(t)),
 \end{equation}
-hvor $\dot{\fcn}$ er den deriverte av funksjonen $\fcn$ med hensyn på variabelen $t$, og $f$ er en funksjon. Dersom $f$ ikke eksplisitt er avhengig av $t$, altså dersom vi kan skrive $f = f(\fcn(t))$, kaller vi ligningen autonom. Videre, dersom $f$ er en lineær funksjon i $\fcn$ er differensialligningen lineær.
+hvor $\dot{\fcn}$ betegner deriverte av funksjonen $\fcn$ med hensyn på variabelen $t$. Funksjonen $f$ beskriver relasjonen mellom $\dot{\fcn}(t)$, $t$ og $\fcn(t)$. Dersom $f$ ikke eksplisitt er avhengig av $t$, altså dersom vi kan skrive $f = f(\fcn(t))$, sier vi at ligningen er autonom. Videre, dersom $f$ er en lineær funksjon i $\fcn$ er ligningen lineær.
 
 \begin{defn}
-    Funksjonen $\fcn(t)$ er en løsning til ligning \eqref{eq:generell_ekspl_forsteordens} dersom den er kontinuerlig deriverbar på et åpent intervall $I = (a, b)$ og tilfredsstiller ligningen på dette intervallet.
+    Funksjonen $\fcn(t)$ er en løsning til ODEen \eqref{eq:generell_ekspl_forsteordens} på et åpent intervall $I = (a, b)$ dersom den er kontinuerlig deriverbar og tilfredsstiller ligningen på $I$.
 \end{defn}
 
-Dersom vi kan finne et eksakt uttrykk ved hjelp av et endelig antall kjente funksjoner (polynomer, trigonometriske funksjoner, eksponensialfunksjoner, osv.) for løsningen til en differensialligning kalles dette ofte en analytisk løsning til ligningen. Dette står i kontrast til numeriske løsninger, som er tilnærminger.
+Vi har altså to krav for at et funksjon $x(t)$ skal være en løsning til \eqref{eq:generell_ekspl_forsteordens}. Først må funksjonen være deriverbar, og den deriverte må være kontinuerlig. Hvis ikke dette kravet er på plass gir ikke ligningen så mye mening. Videre må funksjonen naturligvis tilfredsstille ligningen. Det åpne intervallet $I$ kan være litt forvirrende, men nytten ligger i at vi nå kan snakke om løsninger som ikke nødvendigvis er definert på hele $\mathbb{R}$ (merk likevel at intervallet $I$ fint kan være hele $\mathbb{R}$).
 
-En differensialligning kommer sjelden uten en historie som vi må ta hensyn til dersom vi skal forstå den. Initialverdiproblemer er et eksempel på dette.
+\begin{ex}
+    Ligningen
+    \begin{equation*}
+        \dot{x} = x^2
+    \end{equation*}
+    har løsning
+    \begin{equation*}
+        x(t) = \frac{1}{1-t}
+    \end{equation*}
+    på intervallet $(1, \infty)$. Siden $x(t)$ ikke eksisterer for $t=1$ kan løsningen ikke utvides til å gjelde på hele $\mathbb{R}$.
+\end{ex}
 
-\begin{defn} \label{def:ivp}
-    Et initialverdiproblem er en ordinær differensialligning med en tilhørende initialbetingelse, altså
-    \begin{equation} \label{eq:ivp}
-        \left\{
-        \begin{aligned}
-             & \dot{\fcn} = f(\fcn, t), \\
-             & \fcn(t_0) = \fcn_0.
-        \end{aligned}
-        \right.
-    \end{equation}
-\end{defn}
+Dersom det er mulig å finne et eksakt uttrykk ved hjelp av et endelig antall kjente funksjoner (polynomer, trigonometriske funksjoner, eksponentialfunksjoner, osv.) for løsningen til en differensialligning, sier man ofte at man har en analytisk løsning. Dette står i kontrast til numeriske løsninger, som er tilnærminger.
 
-La oss vri å vende litt på initialverdiproblemet gitt i \eqref{eq:ivp}. Husk at derivasjon er definert som en grenseverdi av stigningen til en funksjon. På denne måten er ligning \eqref{eq:generell_ekspl_forsteordens} grensen til ligningen
-\begin{equation*}
-    \frac{\fcn(t + h) - \fcn(t)}{h} = f(\fcn(t), t),
-\end{equation*}
-med $h \rightarrow 0$. På den annen side kan vi integrere og bruke analysens fundamentalterem til å skrive ligningen på integralform, nemlig
-\begin{equation} \label{eq:integralform}
-    \fcn(t) = \fcn_0 + \int_{t_0}^{t} f(\fcn(\tau), \tau) \diff{\tau}.
+I modellering kommer differensialligninger sjelden uten betingelser som vi må ta hensyn til dersom vi skal løse dem. Initialverdiproblemer er eksempler på dette. Generelt kan vi skrive initialverdiproblemet for førsteordens ODEer som
+\begin{equation} \label{eq:ivp}
+    \left\{
+    \begin{aligned}
+            & \dot{\fcn} = f(t, \fcn), \\
+            & \fcn(t_0) = \fcn_0,
+    \end{aligned}
+    \right.
 \end{equation}
-Til integralet på høyre side kan vi bruke numeriske approksimasjoner, som gir opphav til numeriske løsningsteknikker for problemet. En annen idé er å prøve fikspunktiterasjon på \eqref{eq:integralform}. Dette gir kanskje en smakebit på at differensiallignniger kan ses på i forskjellige lys, og at selv om det kan være vanskelig å utlede analytiske løsninger er det et stort utvalg av teknikker og triks tilgjengelig.
+hvor $\fcn(t_0) = \fcn_0$ er initialbetingelsen. En vanlig fysisk tolkning av dette er at vi ønsker å finne banen til en partikkel som befinner seg i posisjonen $x_0$ ved tiden $t_0$, og hvis fart er bestemt av $\dot{\fcn} = f(t, \fcn)$.
+
+La oss vri og vende litt på initialverdiproblemet gitt i \eqref{eq:ivp}. Husk hvordan derivasjon er definert; som grenseverdien av stigningen til en funksjon. På denne måten er ligning \eqref{eq:generell_ekspl_forsteordens} grensen til ligningen
+\begin{equation*}
+    \frac{\fcn(t + h) - \fcn(t)}{h} = f(t, \fcn(t)),
+\end{equation*}
+når $h \rightarrow 0$. På den annen side kan vi integrere \eqref{eq:ivp} fra $t_0$ til $t$, altså
+\begin{equation*}
+    \int_{t_0}^t \frac{\diff{}}{\diff{s}} \fcn(s) \diff{s} = \int_{t_0}^t f(s, \fcn(s)) \diff{s},
+\end{equation*}
+og bruke analysens fundamentalteorem på venstre side til å skrive ligningen på integralformen
+\begin{equation} \label{eq:integralform}
+    \fcn(t) = \fcn_0 + \int_{t_0}^{t} f(s, \fcn(s)) \diff{s}.
+\end{equation}
+Integrasjonen over er utført over en variabel $s$. Dette er naturligvis ikke substansielt for utregningen, siden $s$ forsvinner i integrasjonen, men det tillater oss å beholde variabelen $t$ i ligningen.
+
+Integralet på høyre side av \eqref{eq:integralform} kan tilnærmes numerisk, noe som gir opphav til numeriske løsningsteknikker for initialverdiproblemet \eqref{eq:ivp}. En annen idé er å prøve fikspunktiterasjon på ligningen \eqref{eq:integralform}. Forhåpentligvis gir dette en smakebit på at differensialligninger kan (og bør) ses på i forskjellige lys, og at selv om det kan være vanskelig å utlede analytiske løsninger er det et stort utvalg av teknikker og triks tilgjengelig.
 
 
 \section*{Lineære ligninger}
 
-En førsteordens lineær differensialligning kan skrives på standard form som
+En førsteordens lineær ODE kan skrives på standard form som
 \begin{equation} \label{eq:linear_forsteordens}
-    \dot{\fcn}(t) + p(t) \fcn(t) = q(t).
+    \dot{\fcn}(t) + p(t) \fcn(t) = q(t),
 \end{equation}
-Dersom $r(t) = 0$ sier vi at ligningen er homogen. Ligning \eqref{eq:linear_forsteordens} kan faktisk løses generelt.
+Dersom $q(t) = 0$ sier vi at ligningen er homogen. Ligning \eqref{eq:linear_forsteordens} kan faktisk løses generelt, som vist i følgende proposisjon.
 
 \begin{prop} \label{prop:lineær_løsn}
-    Dersom $p(t)$ og $q(t)$ i ligning \eqref{eq:linear_forsteordens} er kontinuerlige funksjoner på et åpent intervall $I$, og $t_0$ er et punkt på $I$, er funksjonen
-    \begin{equation} \label{eq:generell_losn_linear}
-        \fcn(t) = \expfcn{-P(t)} \biggparanth{ C(t_0) + \int_{t_0}^t q(\tau) \expfcn{P(\tau)} \diff{\tau}},
-    \end{equation}
-    der $P$ er gitt ved
+    Anta at $p(t)$ og $q(t)$ er kontinuerlige funksjoner på et åpent intervall $I$ som inneholder punktet $t_0$. La $C$ være en konstant, og la $P(t)$ være en antiderivert av $p(t)$, altså
     \begin{equation*}
-        P(t) = \int p(t) \diff{t},
+        P(t) = \int p(t) \diff{t}.
     \end{equation*}
-    en løsning til ligningen.
+    Da er funksjonen
+    \begin{equation} \label{eq:generell_losn_linear}
+        \fcn(t) = \expfcn{-P(t)} \biggparanth{ C + \int_{t_0}^t q(s) \expfcn{P(s)} \diff{s}},
+    \end{equation}
+    en generell løsning til ligning \eqref{eq:linear_forsteordens}.
 \end{prop}
 
 \begin{proof}[Bevis]
-    Multiplikasjon med funksjonen $\expfcn{P(t)}$ på begge sider av ligningen gir
+    Multiplikasjon med funksjonen $\expfcn{P(t)}$ på begge sider av ligning \eqref{eq:linear_forsteordens} gir
     \begin{equation*}
         \dot{\fcn}(t) \expfcn{P(t)} + \fcn(t) p(t) \expfcn{P(t)} = q(t) \expfcn{P(t)},
     \end{equation*}
@@ -188,19 +199,25 @@ Dersom $r(t) = 0$ sier vi at ligningen er homogen. Ligning \eqref{eq:linear_fors
     \begin{equation*}
         \frac{\diff{}}{\diff{t}} \bigparanth{\fcn(t) \expfcn{P(t)}} = q(t) \expfcn{P(t)}.
     \end{equation*}
-    Integrerer vi ligningen med hensyn på $t$ og bruker analysens fundamentalteorem får vi dermed
+    Integrerer vi ligningen med hensyn på $t$ får vi
     \begin{equation*}
-        \fcn(t) \expfcn{P(t)} - \fcn(t_0) \expfcn{P(t_0)} = \int_{t_0}^t q(\tau) \expfcn{P(\tau)} \diff{\tau},
+        \int_{t_0}^t \frac{\diff{}}{\diff{s}} \bigparanth{\fcn(s) \expfcn{P(s)}} \diff{s} = \int_{t_0}^{t} q(s) \expfcn{P(s)} \diff{s}.
     \end{equation*}
-    hvor vi skriver $\fcn(t_0) \expfcn{P(t_0)}$ som en konstant $C$ avhengig av $t_0$. Multiplikasjon med $\expfcn{P(t)}$ på begge sider gir nå løsningen \eqref{eq:generell_losn_linear}.
+    Analysens fundamentalteorem gir da at
+    \begin{equation*}
+        \fcn(t) \expfcn{P(t)} - \fcn(t_0) \expfcn{P(t_0)} = \int_{t_0}^t q(s) \expfcn{P(s)} \diff{s},
+    \end{equation*}
+    hvor vi skriver $\fcn(t_0) \expfcn{P(t_0)}$ som en konstant $C$. Multiplikasjon med $\expfcn{-P(t)}$ på begge sider gir nå den generelle løsningen \eqref{eq:generell_losn_linear}.
 \end{proof}
+
+Løsningen kalles generell når den inneholder en ubestemt konstant $C$. Dersom konstanten $C$ bestemmes av initialbetingelser sier vi at vi har en spesiell løsning. La oss se på noen eksempler.
 
 \begin{ex}
     Vi vet at ligningen
     \begin{equation*}
         \dot{\fcn} + a \fcn = 0
     \end{equation*}
-    har løsning
+    har generell løsning
     \begin{equation*}
         \fcn(t) = C \expfcn{-a t}
     \end{equation*}
@@ -223,26 +240,38 @@ Dersom $r(t) = 0$ sier vi at ligningen er homogen. Ligning \eqref{eq:linear_fors
     ved hjelp av kjerneregelen. Siden det ikke er oppgitt en initialbetingelse her kommer løsningen til å inneholde en ukjent konstant. Vi kan for eksempel integrere fra $0$ til $t$, som gir
     \begin{equation*}
         \begin{aligned}
-            \int_0^t \frac{\diff{}}{\diff{\tau}} \bigparanth{\fcn(\tau) \expfcn{-2\tau}} \diff{\tau} & = \fcn(t)\expfcn{-2t} - \fcn(0)                             \\
-                                                                                                     & = \int_0^t 3\expfcn{-\tau} \diff{\tau} = -3\expfcn{-t} + 3.
+            \int_0^t \frac{\diff{}}{\diff{s}} \bigparanth{\fcn(s) \expfcn{-2s}} \diff{s} & = \fcn(t)\expfcn{-2t} - \fcn(0) \\
+            & = \int_0^t 3\expfcn{-s} \diff{s} = -3\expfcn{-t} + 3.
         \end{aligned}
     \end{equation*}
-    (Integrasjonen er utført over en variabel $\tau$. Dette er naturligvis ikke substansielt for utregningen siden $\tau$ forsvinner i integrasjonen, men det tillater oss å beholde variabelen $t$ i ligningen.) Vi flytter så $x(0)$ over på andre siden og ganger med, og står da igjen med løsningen
+    Vi flytter så $x(0)$ over til høyre side og ganger med $\expfcn{2t}$, og står da igjen med den generelle løsningen
     \begin{equation*}
-        \fcn(t) = (3+\fcn(0)) \expfcn{2t} - 3\expfcn{t} = C \expfcn{2t} - 3\expfcn{t},
+        \fcn(t) = (3+\fcn(0)) \expfcn{2t} - 3\expfcn{t} = C \expfcn{2t} - 3\expfcn{t}.
     \end{equation*}
-    hvor $C$ er en konstant som kan bestemmes av eventuelle initialbetingelser.
-
-    Til slutt skal vi legge merke til at funksjonen $\expfcn{-2t}$ løser den homogene ligningen
+    Den spesielle løsningen kan finnes ved å bestemme $C$ fra en initialbetingelse for problemet. Vi merker oss at funksjonen $\expfcn{2t}$ løser den homogene ligningen
     \begin{equation*}
         \dot{\fcn} - 2\fcn = 0,
     \end{equation*}
-    og at funksjonen $-3\expfcn{t}$ løser den tilhørende inhomogene ligningen med $3\expfcn{t}$ på høyre side. Vi kaller disse henholdsvis den homogene og den inhomogene løsningen. Summen av dem løser fortsatt den inhomogene ligningen, siden ligningen er lineær og den homogene ligningen bare blir null på venstre side. Dette er et spesialtilfelle av det såkalte superposisjonsprinsippet for lineære systemer.
+    og at funksjonen $-3\expfcn{t}$ løser den tilhørende inhomogene ligningen med $3\expfcn{t}$ på høyre side. Disse kalles henholdsvis den homogene og den inhomogene løsningen.
 \end{ex}
 
-Dette er bra, vi kan nå løse en ganske stor klasse av lineære førsteordens differensialligninger. Her kommer også et lite frempek på hvorfor vi har valgt å studere lineære ligninger som et eget tema før vi ser på ikkelineære ligninger; teknikkene kan i stor grad generaliseres ved hjelp av lineær algebra. Dersom funksjonen som inngår i ligningen er en vektorfunksjon med $n$ komponenter på formen
+\begin{ex} \label{eks:krets_2}
+    La oss løse ligningen
+    \begin{equation*}
+        \dot{I} + \frac{R}{L} I = \frac{V_s}{L}
+    \end{equation*}
+    fra Eksempel \ref{eks:krets_1}, gitt at $V_s(t)$ er en kontinuerlig funksjon på et åpent intervall $I$. Proposisjon \ref{prop:lineær_løsn} gir da at den generelle løsningen for strømmen i kretsen er
+    \begin{equation*}
+        I(t) = \expfcn{-\frac{R}{L}t}\biggparanth{C + \int_{t_0}^t \frac{V_s(s)}{L} \expfcn{\frac{R}{L}s} \diff{s} }, 
+    \end{equation*}
+    for $t_0, t \in I$. Løsningen er naturligvis avhengig av spenningskilden $V_s(t)$.
+\end{ex}
+
+Med Proposisjon \ref{prop:lineær_løsn} kan vi løse en ganske stor klasse av førsteordens lineære ODEer. Her kommer et lite frempek på hvorfor vi har valgt å studere lineære ligninger som et eget tema før vi ser på ikke-lineære ligninger: de lineære teknikkene kan i stor grad generaliseres ved hjelp av lineær algebra.
+
+Dersom funksjonen som inngår i ligningen er en vektorfunksjon med $n$ komponenter på formen
 \begin{equation*}
-    \boldsymbol{x}(t) =
+    \boldsymbol{\fcn}(t) =
     \begin{pmatrix}
         x_1(t) \\
         x_2(t) \\
@@ -250,15 +279,26 @@ Dette er bra, vi kan nå løse en ganske stor klasse av lineære førsteordens d
         x_n(t)
     \end{pmatrix},
 \end{equation*}
-kan vi skrive et system av lineære førsteordens differensialligninger som
+kan vi skrive et system av lineære førsteordens homogene ODEer som
 \begin{equation*}
-    \dot{\boldsymbol{x}}(t) = A \boldsymbol{x}(t),
+    \dot{\boldsymbol{\fcn}}(t) - A \boldsymbol{\fcn}(t) = 0,
 \end{equation*}
-der $A$ er en matrise. I prinsippet kan dette problemet løses på samme måte som den skalare ligningen \eqref{eq:linear_forsteordens}, selv om man trenger litt mer matematisk maskineri. Det skal vi ikke gjøre her.
+der $A$ er en matrise. I prinsippet kan dette problemet løses på samme måte som den skalare ligningen \eqref{eq:linear_forsteordens}. Til dette trenger vi riktignok litt mer matematisk maskineri, som vi ikke skal gå inn på her.
 
-\section*{Ikkelineære ligninger}
 
-Ikkelineære differensialligninger er ofte vanskeligere å løse analytisk enn lineære ligninger. Likevel kan vi løse noen av dem ved seperasjon.
+\section*{Ikke-lineære ligninger}
+
+Ikke-lineære differensialligninger er som regel vanskelige eller umulige å løse analytisk. Vi skal her se på to ulike teknikker: løsning ved separasjon og analyse av faseplan. Senere skal vi utlede numeriske metoder for ligningene.
+
+Noen spesielle ODEer kan løses ved separasjon. Teknikken bygger på at man for ligninger på formen
+\begin{equation*}
+    \dot{\fcn}(t) = f(\fcn) g(t),
+\end{equation*}
+med $f(\fcn(t)) \neq 0$ for $t, t_0 \in I$, og $f$ og $g$ kontinuerlige, kan integrere ligningen
+\begin{equation*}
+    \int_{t_0}^t \frac{1}{f(\fcn(s))} \dot{\fcn}(s) \diff{s} = \int_{t_0}^t g(t) \diff{t},
+\end{equation*}
+og deretter bruke analysens fundamentalteorem til å finne løsningen $\fcn(t)$. Vi ser på et eksempel.
 
 \begin{ex}
     Betrakt ligningen
@@ -269,7 +309,7 @@ Ikkelineære differensialligninger er ofte vanskeligere å løse analytisk enn l
     \begin{equation*}
         \frac{\dot{\fcn}}{1 + \fcn^2} = 1.
     \end{equation*}
-    Siden den antideriverte til $\frac{1}{1+\fcn^2}$ er $\arctan \fcn$ kan vi skrive dette som
+    Siden den antideriverte til $\frac{1}{1+\fcn^2}$ er $\arctan \fcn$, kan vi skrive dette som
     \begin{equation*}
         \frac{\diff{}}{\diff{t}} \arctan \fcn = 1,
     \end{equation*}
@@ -279,24 +319,23 @@ Ikkelineære differensialligninger er ofte vanskeligere å løse analytisk enn l
     \end{equation*}
     Dette gir altså løsningen
     \begin{equation*}
-        \fcn(t) = \tan(t + c),
+        \fcn(t) = \tan(t + C),
     \end{equation*}
-    der $c$ er konstanten $\arctan \fcn(t_0)$ gitt av en eventuell initialbetingelse.
+    der $C$ er konstanten $\arctan \fcn(t_0)$ gitt av en eventuell initialbetingelse for problemet.
 \end{ex}
 
-Nå skal vi se på hvordan vi kan argumentere litt mer kvalitativt. Vi ønsker å få informasjon ut av systemet uten å gjøre for mye arbeid som vi ikke en gang fører frem til svaret. Videre vil det være lettere å sjekke om et eventuelt svar er fornuftig dersom vi skulle ta bryet med å regne det ut.
+Nå skal vi se på hvordan vi kan argumentere litt mer kvalitativt. Vi ønsker å hente ut informasjon om ligningen og systemet den beskriver uten å faktisk løse den. Dette kan være svært nyttig, både for ligninger vi ikke klarer å løse, og som test på om løsninger vi har funnet gir mening. Som et eksempel på dette skal vi se på populasjonsmodellen fra Eksempel \ref{eks:populasjon_1}.
 
 \begin{ex} \label{eks:populasjon_2}
     Populasjonsmodellen
+    \begin{equation} \label{eq:populasjonsmodell}
+        \dot{\fcn} = A \fcn - B \fcn^2
+    \end{equation}
+    kan løses ved separasjon: skriv ligningen som
     \begin{equation*}
-        \dot{x} = A x - B x^2
+        \frac{\dot{\fcn}}{A \fcn - B \fcn^2} = 1,
     \end{equation*}
-    fra Eksempel \ref{eks:populasjon_1} kan løses ved separasjon. Da kan vi skrive
-    \begin{equation*}
-        \frac{\dot{x}}{A x - B x^2} = 1,
-    \end{equation*}
-    og så bruke delbrøksoppspalting til å regne ut integralet av venstre side. Men hva om vi ikke er i humør til å regne så mye, men bare har lyst til å vite litt om oppførselen til systemet?
-
+    og bruk delbrøkoppspalting til å regne ut integralet av venstre side. Det er ikke vanskelig å se at dette blir mye regning. La oss heller skissere hvordan en løsning vil se ut dersom vi plotter $\dot{\fcn}$ mot $\fcn$, slik som vist i diagrammet under.
     \begin{center}
         \begin{tikzpicture}
             \pgfplotsset{ticks=none},
@@ -317,75 +356,132 @@ Nå skal vi se på hvordan vi kan argumentere litt mer kvalitativt. Vi ønsker �
                 \draw[-{Latex[length=3mm]}, very thin] (axis cs:6,0) -- (axis cs:4.6,0);
                 \draw[-{Latex[length=3mm]}, very thin] (axis cs:0,0) -- (axis cs:2,0);
 
-                \node[circle, draw=black, fill=white, inner sep=0pt, minimum size=4pt] at (axis cs:0,0) {};
-                \node[circle, draw=black, fill=black, inner sep=0pt, minimum size=4pt] at (axis cs:3.5,0) {};
+                \node[circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt] at (axis cs:0,0) {};
+                \node[circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt] at (axis cs:3.5,0) {};
+
+                \draw[thick, dashed]
+                (axis cs: 3.5, -3) to (axis cs: 3.5, 2.5) coordinate[label = {above:$A/B$}];
             \end{axis}
         \end{tikzpicture}
     \end{center}
-    Når høyresiden er positiv, altså for $x(t)$ mellom $0$ og $A/B$, øker populasjonen. Dersom populasjonen overstiger $A/B$ antall individer ser vi fra diagrammet at populasjonen begynner å minke, forsdi den deriverte nå er negativ. Ut fra dette kan vi forvente oss at en hvilken som helst populasjon som følger denne loven vil bevege seg mot tilstanden $x(t) = A/B$, og at dette er et likevektspunkt for modellen. Vi sier at dette er stabilt, fordi pilene peker inn mot dette punktet fra begge retninger. På den anne side har vi et ustabilt likevektspunkt i null, fordi dersom populasjonen har null medlemmer er dette også et likevektspunkt, men et hvilket som helst avvik fra dette vil sende modellen mot det andre, stabile punktet.
+    Når høyresiden i ligning \eqref{eq:populasjonsmodell} er positiv, altså for
+    \begin{equation*}
+        0 < \fcn(t) < \frac{A}{B},
+    \end{equation*}
+    er den deriverte også positiv, og populasjonen øker. Dersom populasjonen $\fcn(t)$ overstiger $A/B$ antall individer ser vi fra diagrammet at populasjonen begynner å minke, siden den deriverte nå er negativ (dette er tegnet inn som piler langs den horisontale aksen i diagrammet). Ut fra dette kan vi forvente oss at en hvilken som helst populasjon som følger loven \eqref{eq:populasjonsmodell} vil bevege seg mot likevektspunktet $\fcn(t) = A/B$. Dette likevektspunktet er stabilt, siden pilene fra begge sider peker inn mot dette punktet. I $\fcn = 0$ har vi et ustabilt likevektspunkt, ettersom et hvert avvik fra null medlemmer vil gjøre at populasjonen øker, helt til den når likevektspunktet i $A/B$.
 \end{ex}
 
-Vi skal nå se litt på hva som kan sies i det generelle tilfellet, nemlig for initialverdiproblemet
+Diagrammet som ble brukt i Eksempel \ref{eks:populasjon_2} er et enkelt eksempel på et fasediagram. I stedet for å plotte løsningen $\fcn(t)$ mot variabelen $t$ plotter vi i fasediagrammet den deriverte $\dot{\fcn}$ mot $\fcn$ selv. Variabelen $t$ er dermed bare implisitt tilstede i fasediagrammet. Analysen består i å identifisere likevektspunktene til systemet, altså verdier for $\fcn$ slik at $\dot{\fcn} = 0$, for så å resonnere seg frem til for hvordan $\fcn(t)$ beveger seg mellom disse.
+
+
+\section*{Eksistens og entydighet}
+
+Vi skal nå se på hva som kan sies om eksistens og entydighet av løsninger for det generelle initialverdiproblemet
 \begin{equation} \label{eq:ivp_2}
     \left\{
     \begin{aligned}
-         & \dot{\fcn} = f(\fcn, t), \\
+         & \dot{\fcn} = f(t, \fcn), \\
          & \fcn(t_0) = \fcn_0.
     \end{aligned}
     \right.
 \end{equation}
-fra Definisjon \ref{def:ivp}. Dette kan virke litt umotivert for øyeblikket, men det er bare fordi vi til nå har sett et lite utvalg av veldig snille ligninger. I det generelle tilfelle er det ofte svært vanskelig, og noen ganger umulig, å finne løsninger til differensialligninger. Derfor har vi følgende resultat som sier når vi kan forvente at det eksisterer løsninger, og at disse er unike.
+Dette kan virke litt umotivert for øyeblikket, fordi vi til nå bare har sett et lite utvalg av veldig snille ligninger. I det generelle tilfellet er det ofte svært vanskelig, og noen ganger umulig, å finne entydige løsninger til problemet \eqref{eq:ivp_2}. Derfor inkluderer vi følgende resultat, som gir betingelser for eksistens og entydighet av løsninger.
 
 \begin{thm} \label{thm:eksistens_unikhet}
-    La $f$ være en kontinuerlig deriverbar funksjon på det åpne intervallet $I$, og la $t_0 \in I$. Da finnes det en $\delta > 0$ og en unik kontinuerlig deriverbar funksjon $x(t)$ som løser initialverdiproblemet \eqref{eq:ivp_2} på intervallet $[t_0 - \delta, t_0 + \delta]$.
+    La $f(t, x)$ være en kontinuerlig funksjon på en åpen mengde $U \subset \mathbb{R}^2$ slik at $(t_0, x_0) \in U$, og anta at $f$ er kontinuerlig deriverbar i variabelen $x$ på området $U$. Da eksisterer det et tall $\delta > 0$ og en entydig løsning $x(t)$ til initialverdiproblemet \eqref{eq:ivp_2} på intervallet ${I = [t_0 - \delta, t_0 + \delta]}$.
 \end{thm}
 
-\begin{proof}[Skisse av bevis]
-    Tidligere har vi sett litt på at fikspunktiterasjon kan brukes til å enkelt løse skalare ligninger. Nå skal vi ta dette videre ett steg, nemlig å løse initialverdiproblemet \eqref{eq:ivp_2} med fikspunktiterasjon!
+Tidligere har vi brukt fikspunktiterasjon til å løse skalare ligninger numerisk. Nå skal vi ta dette et steg videre, ved å løse initialverdiproblemet \eqref{eq:ivp_2} med fikspunktiterasjon. Beviset her er kun en skisse av de viktigste ideene, mens detaljene er utelatt. Vi må likevel introdusere følgende fakta som argumentasjonen er avhengig av. Dersom $g(x)$ er en kontinuerlig funksjon på et lukket intervall $I$ finnes det en konstant $L < \infty$ slik at
+\begin{equation*}
+    \max_{x \in I} \abs{f(x)} \leq L.
+\end{equation*}
+Videre, dersom $g$ er kontinuerlig deriverbar på et lukket intervall $I$ gjelder midellverditeoremet for funksjonen $g$, og vi har
+\begin{equation} \label{eq:lip}
+        \abs{g(x) - g(y)} \leq \max_{x \in I} \bigabs{f'(x)} \abs{x-y} \leq L \abs{x-y},
+\end{equation}
+for alle $x, y \in I$, siden den deriverte av $f$ er kontinuerlig.
 
-    Først kan initialverdiproblemet skrives på integralform slik som i \eqref{eq:integralform}. Så kan vi anta at vi begynner med en funksjon $g_0$ som vi itererer gjennom
+\begin{proof}[Skisse av bevis for Teorem \ref{thm:eksistens_unikhet}]
+    Som vist ovenfor kan initialverdiproblemet \eqref{eq:ivp_2} skrives på integralform
+    \begin{equation*}
+        x(t) = x(t_0) + \int_{t_0}^t f(s, x(s)) \diff{s}.
+    \end{equation*}
+    Med dette som utgangspunkt kan vi definere fikspunktiterasjonen
     \begin{equation}
-        g_{n+1}(t) = \fcn_0 + \int_{t_0}^{t} f(g_n(s), s) \diff{s}.
+        g_{n+1}(t) = \fcn_0 + \int_{t_0}^{t} f(s, g_n(s)) \diff{s},
     \end{equation}
-    Vi får da en følge av funksjoner $\{g_n\}_{n \in \mathbb{N}}$. I praksis er denne følgen ganske ubrukelig, siden vi må regne ut et nytt integral (og mer komplisert) integral for hver nye iterasjon for $g_n$. Men som bevisteknikk viser det seg å være veldig nyttig. Poenget kan illustreres gjennom følgende observasjon. La $g_0$ være en kontinuerlig deriverbar funksjon på $I$, og la oss anta at $|g_1 - g_0| \leq M$ for et tall $M$ (dette er faktisk sant, siden begge er kontinuerlig deriverbare). Da har vi
+    som gir opphav til en følge funksjoner $\{g_n(t)\}_{n \in \mathbb{N}}$. Merk at dette er en utvidelse av fikspunktalgoritmene vi har sett tidligere: dette er en rekursiv formel for funksjoner, og ikke tall. La oss nå anta at vi begynner med konstanten $x_0$ som $g_0(t)$, altså vår første gjetning på hva løsningen er. Da blir
+    \begin{equation*}
+        g_1(t) = \fcn_0 + \int_{t_0}^{t} f(s, x_0) \diff{s}.
+    \end{equation*}
+    Hvor stor er forskjellen mellom $g_0(t)$ og $g_1(t)$? Differansen i den første rekursjonen på et intervall $I$ rundt $t_0$ blir
     \begin{equation*}
         \begin{aligned}
-            \abs{g_{2} - g_1} & = \biggabs{\int_{t_0}^{t} f(g_1(s), s) \diff{s} - \int_{t_0}^{t} f(g_{0}(s), s) \diff{s}} \\
-            & \leq \int_{t_0}^{t} \abs{f(g_1(s), s) - f(g_{0}(s), s)} \diff{s} \\
-            & \leq \int_{t_0}^{t} K \abs{g_1(s) - g_{0}(s)} \diff{s} \\
-            & \leq \abs{t - t_0} K M.
+            \abs{g_1(t) - g_0(t)} = & \biggabs{x_0 + \int_{t_0}^{t} f(s, x_0) \diff{s} - x_0} \\
+            & = \biggabs{ \int_{t_0}^{t} f(s, x_0) \diff{s} } \\
+            & \leq \int_{t_0}^{t} \abs{f(s, x_0)} \diff{s} \\
+            & \leq \abs{t - t_0} \max_{t \in I} \bigabs{f(t, x_0)}.
         \end{aligned}
     \end{equation*}
-    På samme måte får vi for den neste differansen at
+    Siden $f$ er kontinuerlig på en mengde $U$ som inneholder $(t_0, x_0)$ kan vi anta at $f$ er kontinuerlig på intervallet $I = [t_0 - \delta, t_0 + \delta]$ (ved å velge $\delta$ liten), slik at
+    \begin{equation*}
+        \max_{t \in I} \bigabs{f(t, x_0)} \leq L < \infty.
+    \end{equation*}
+    Vi har også at $\abs{t - t_0} \leq \delta$ for $t \in I$. Dermed har vi
+    \begin{equation} \label{eq:første_diff}
+        \abs{g_1(t) - g_0(t)} \leq \abs{t - t_0} \max_{t \in I} \bigabs{f(t, x_0)} \leq \delta L.
+    \end{equation}
+    Den neste differansen i rekursjonen blir da
     \begin{equation*}
         \begin{aligned}
-            \abs{g_{3} - g_2} & = \biggabs{\int_{t_0}^{t} f(g_1(s), s) \diff{s} - \int_{t_0}^{t} f(g_{0}(s), s) \diff{s}} \\
-            & \leq \int_{t_0}^{t} \abs{f(g_1(s), s) - f(g_{0}(s), s)} \diff{s} \\
-            & \leq \int_{t_0}^{t} K \abs{g_1(s) - g_{0}(s)} \diff{s} \\
-            & \leq \abs{t - t_0} K M.
+            \abs{g_{2}(t) - g_1(t)} & = \biggabs{\int_{t_0}^{t} f(s, g_1(s)) \diff{s} - \int_{t_0}^{t} f(s, g_{0}(s)) \diff{s}} \\
+            & \leq \int_{t_0}^{t} \bigabs{f(s, g_1(s)) - f(s, g_{0}(s))} \diff{s} \\
+            & \leq \int_{t_0}^{t} L \abs{g_1(s) - g_{0}(s)} \diff{s} \\
+            & \leq \delta L^2 \int_{t_0}^{t} \diff{s} \\
+            & \leq (\delta L)^2,
         \end{aligned}
     \end{equation*}
-
-    Ut fra dette er det ikke unaturlig å ha som hypotese at $\abs{g_{n+1} - g_n} \leq \abs{t-t_0}^n K^n M$. Dersom vi velger $t$ nærme nok $t_0$ slik at $\abs{t-t_0} K < 1$ kommer differansen $\abs{g_{n+1} - g_n}$ til å bli mindre og mindre for større $n$. Matematikere kan bruke dette til å vise at følgen konvergerer til en funksjon $g$, og at denne faktisk løser initialverdiproblemet \eqref{def:ivp}. Vi skal ikke gjøre dette grundig her, men med litt trening og litt mer kunnskap om konvergens i funksjonsrom kan du kanskje finne ut av detaljene selv.
+    der vi har brukt at ulikheten \eqref{eq:lip} siden $f$ er kontinuerlig deriverbar i $x$, og estimatet \eqref{eq:første_diff} for differansen $\abs{g_1 - g_0}$. Dette argumentet kan vi nå iterere i det uendelige, og neste differanse blir
+    \begin{equation*}
+        \begin{aligned}
+            \abs{g_{3}(t) - g_2(t)} & = \biggabs{\int_{t_0}^{t} f(s, g_2(s)) \diff{s} - \int_{t_0}^{t} f(s, g_{1}(s)) \diff{s}} \\
+            & \leq \int_{t_0}^{t} \abs{f(s, g_2(s)) - f(s, g_{1}(s))} \diff{s} \\
+            & \leq \int_{t_0}^{t} L \abs{g_2(s) - g_{1}(s)} \diff{s} \\
+            & \leq (\delta L)^3.
+        \end{aligned}
+    \end{equation*}
+    Vi kan gjette på at den generelle sammenhengen blir
+    \begin{equation*}
+        \abs{g_{n+1}(t) - g_n(t)} \leq (\delta L)^n,     
+    \end{equation*}
+    noe fører oss til kjernen av argumentet: Dersom vi velger $\delta$ liten, slik at $\delta L < 1$, kommer differansen $\abs{g_{n+1}(t) - g_n(t)}$ til å bli mindre og mindre for større $n$. Vi har faktisk at ${(\delta L)^n \rightarrow 0}$ for ${n \rightarrow \infty}$ når $\delta L < 1$. Dette betyr at forskjellen blir mindre og mindre: det kan se ut som om følgen vår kommer til å konvergere! 
+    
+    Matematikere bruker også dette til å vise at følgen $\{g_n(t)\}_{n \in \mathbb{N}}$ konvergerer til en funksjon $g$, og at denne nødvendigvis løser initialverdiproblemet \eqref{eq:ivp} på intervallet $I$. Vi skal ikke gjøre dette grundig her, men med litt trening og litt mer kunnskap om konvergens i funksjonsrom kan du kanskje finne ut av detaljene selv.
 \end{proof}
 
-Teorem \ref{thm:eksistens_unikhet} er greit å kjenne til, men har begrenset praktisk betydning for en ingeniør. Som regel tyr vi til numeriske metoder for å utforske differensialligninger.
+Teorem \ref{thm:eksistens_unikhet} er ofte greit å kjenne til, men kan ha begrenset praktisk betydning for en ingeniør. Som regel bruker vi numeriske metoder for å utforske differensialligninger.
 
 
 \section*{Numeriske metoder}
 
-Vi har flere ganger sett at initialverdiproblemet \eqref{def:ivp} kan skrives på integralform som
+Problemet vi står overfor er å finne en tilnærming til løsningen $\fcn(t)$ av initialverdiproblemet
+\begin{equation} \label{eq:ivp_3}
+    \left\{
+    \begin{aligned}
+         & \dot{\fcn} = f(t, \fcn(t)), \\
+         & \fcn(t_0) = \fcn_0,
+    \end{aligned}
+    \right.
+\end{equation}
+på intervallet $[t_0, T]$, for $T > t_0$. La $\{t_i\}_{i = 0, ..., N}$ være en jevn partisjon
 \begin{equation*}
-    \fcn(t) = \fcn_0 + \int_{t_0}^t f(x(s), s) \diff{s}.
+    t_i = t_0 + h i, \qquad i = 0, 1, 2, ..., N
 \end{equation*}
-Vi ønsker å løse dette problemet numerisk på intervallet $[t_0, T]$ for en $T > t_0$. For å gjøre dette innfører vi en jevn partisjon av intervallet $[t_0, T]$,
-\begin{equation*}
-    t_i = t_0 + h i, \qquad i = 0, 1, 2, \cdots
-\end{equation*}
-hvor
+av intervallet $[t_0, T]$ i $N$ like lange delintervaller $[t_i, t_{i+1})$ av lengde
 \begin{equation*}
     h = \frac{T - t_0}{N}.
 \end{equation*}
+Vi ønsker å approksimere funksjonen $\fcn(t)$ i punktene $t_i$, og innfører notasjonen $\fcn_i \approx \fcn(t_i)$ for tilnærmingen. Dette kan illustreres som vist under.
 \begin{center}
     \begin{tikzpicture}
         \draw[thick, ->]
@@ -404,81 +500,75 @@ hvor
         (7, 0.3) to (7, -0.3) coordinate[label = {below:$T$}];
 
         \draw (4, -0.2) coordinate[label = {below:$\cdots$}];
-        \draw (1.6, 3) coordinate[label = {above:$x_0 \approx x(t_0)$}];
+        \draw (5.2, 1.1) coordinate[label = {above:$\fcn_i \approx \fcn(t_i)$}];
 
-        \filldraw[black] (1, 3) circle (1pt);
-        \filldraw[black] (2, 2) circle (1pt) coordinate[label = {above:$x_1$}];
-        \filldraw[black] (3, 1.5) circle (1pt) coordinate[label = {above:$x_2$}];
-        \filldraw[black] (5, 1) circle (1pt) coordinate[label = {above:$x_i$}];
-        \filldraw[black] (7, 0.8) circle (1pt) coordinate[label = {above:$x_T$}];
+        \filldraw[black] (1, 3) circle (1pt) coordinate[label = {above:$\fcn_0$}];
+        \filldraw[black] (2, 2) circle (1pt) coordinate[label = {above:$\fcn_1$}];
+        \filldraw[black] (3, 1.5) circle (1pt) coordinate[label = {above:$\fcn_2$}];
+        \filldraw[black] (5, 1) circle (1pt);
+        \filldraw[black] (7, 0.8) circle (1pt) coordinate[label = {above:$\fcn_N$}];
         
         \draw[decoration={brace},decorate]
         (1,0.4) -- node[above=5pt] {$h$} (2, 0.4);
     
     \end{tikzpicture}
 \end{center}
-Vi ønsker å approksimere funksjonen $x(t)$ i punktene $t_i$, og innfører approksimasjonen $x_i \approx x(t_i)$. Formler for disse approksimasjonene skal vi utlede fra integralformen til problemet.
-\begin{equation*}
-    x(t_{i+1}) - x(t_i) = \int_{t_i}^{t_{i+1}} f(x(s), s) \diff{s}.
-\end{equation*}
-Dermed
-\begin{equation*}
-    x_{i+1} \approx x_i + \int_{t_i}^{t_{i+1}} f(x(s), s) \diff{s}.
-\end{equation*}
-Nå kan vi approksimere integralet på høyre side. Vi lister opp noen ulike måter å gjøre dette på.
 
+For å utlede formler for tilnærmingen $\{\fcn_i\}_{i = 0, ..., N}$ for $\fcn(t)$ kan vi integrere initialverdiproblemet \eqref{eq:ivp_3} over et delintervall $[t_i, t_{i+1})$, noe som gir
+\begin{equation*}
+    \fcn(t_{i+1}) - \fcn(t_i) = \int_{t_i}^{t_{i+1}} f(s, \fcn(s)) \diff{s}.
+\end{equation*}
+Dette gir formelen
+\begin{equation*}
+    \fcn_{i+1} \approx \fcn_i + \int_{t_i}^{t_{i+1}} f(s, \fcn(s)) \diff{s},
+\end{equation*}
+som kan regnes ut ved numerisk approksimasjon av integralet på høyre side. Vi lister opp noen ulike måter å gjøre dette på.
+
+Den enkleste tilnærmingen er å anta at $f(t, \fcn(t)) \approx f(t_i, \fcn_i)$ på $[t_i, t_{i+1})$. Det gir
+\begin{equation*}
+    \int_{t_i}^{t_{i+1}} f(s, \fcn(s)) \diff{s} \approx \int_{t_i}^{t_{i+1}} f(t_i, \fcn_i) \diff{s} = h f(t_i, \fcn_i),
+\end{equation*}
+som gir opphav til Eulers eksplisitte metode
+\begin{equation*}
+    \fcn_{i + 1} = \fcn_i + h f(t_i, \fcn_i), \qquad i = 0, \cdots, N - 1.
+\end{equation*}
 Med tilnærmingen
 \begin{equation*}
-    \int_{t_i}^{t_{i+1}} f(x(s), s) \diff{s} \approx \int_{t_i}^{t_{i+1}} f(t_i, x_i) \diff{s} = h f(t_i, x_i)
+    \int_{t_i}^{t_{i+1}} f(\fcn(s), s) \diff{s} \approx h f(t_{i+1}, \fcn_{i+1})
 \end{equation*}
-Tilnærmingen
+får vi Eulers implisitte metode, mens trapesregelen for integraler
 \begin{equation*}
-    \int_{t_i}^{t_{i+1}} f(x(s), s) \diff{s} \approx h f(t_{i+1}, x_{i+1})
+    \int_{t_i}^{t_{i+1}} f(\fcn(s), s) \diff{s} \approx \frac{h}{2} (f(t_{i}, \fcn_{i}) + f(t_{i+1}, \fcn_{i+1}))
 \end{equation*}
-gir Eulers implisitte metode. Trapesregelen for integraler
+gir trapesmetoden. Dersom vi i trapesmetoden tilnærmer $\fcn_{i+1}$ med Eulers eksplisitte metode får vi Heuns metode. Til sist, ved approksimasjonen
 \begin{equation*}
-    \int_{t_i}^{t_{i+1}} f(x(s), s) \diff{s} \approx \frac{h}{2} (f(t_{i}, x_{i}) + f(t_{i+1}, x_{i+1}))
+    \int_{t_i}^{t_{i+1}} f(\fcn(s), s) \diff{s} \approx h f\bigparanth{\frac{t_{i+1} + t_i}{2}, \frac{\fcn_{i+1} + \fcn_i}{2}}
 \end{equation*}
-gir trapesmetoden. Dersom vi i trapesmetoden tilnærmer $x_{i+1}$ med Eulers eksplisitte metode får vi Heuns metode,
-
-Til sist, ved approksimasjonen
-\begin{equation*}
-    \int_{t_i}^{t_{i+1}} f(x(s), s) \diff{s} \approx h f\bigparanth{\frac{t_{i+1} + t_i}{2}, \frac{x_{i+1} + x_i}{2}}
-\end{equation*}
-får man midtpunktmetoden
+får man midtpunktmetoden.
 
 
 \begin{defn}
-    Vi har nå definert følgende numeriske metoder for førsteordens initialverdiproblem.
-
-    Euler eksplisitt,
-    \begin{equation*}
-        x_{i + 1} = x_i + h f(t_i, x_i), \qquad i = 0, \cdots, N - 1.
-    \end{equation*}
-    Euler implisitt,
-    \begin{equation*}
-        x_{i + 1} = x_i + h f(t_{i+1}, x_{i+1}), \qquad i = 0, \cdots, N - 1,
-    \end{equation*}
-    trapesmetoden,
-    \begin{equation*}
-        x_{i + 1} = x_i + \frac{h}{2} (f(t_{i}, x_{i}) + f(t_{i+1}, x_{i+1})), \qquad i = 0, \cdots, N - 1.
-    \end{equation*}
-    Heuns metode,
-    \begin{equation*}
-        \begin{aligned}
-            & x^* = x_i + h f(t_i, x_i), \\
-            & x_{i + 1} = x_i + \frac{h}{2} (f(t_{i}, x_{i}) + f(t_{i+1}, x^*)), \qquad i = 0, \cdots, N - 1.
-        \end{aligned}
-    \end{equation*}
-    og midpunktmetoden,
-    \begin{equation*}
-        x_{i + 1} = x_i + h f\biggparanth{\frac{t_{i+1} + t_i}{2}, \frac{x_{i+1} + x_i}{2}}, \qquad i = 0, \cdots, N - 1.
-    \end{equation*}
+    Vi har nå definert følgende numeriske metoder for initialverdiproblemet \eqref{eq:ivp_3} over partisjonen $\{t_i\}_{i = 0, ..., N}$ av $[t_0, T]$.
+    \begin{align}
+        \fcn_{i + 1} & = \fcn_i + h f(t_i, \fcn_i), \tag{Euler eksplisitt} \\
+        \fcn_{i + 1} & = \fcn_i + h f(t_{i+1}, \fcn_{i+1}), \tag{Euler implisitt} \\
+        \fcn_{i + 1} & = \fcn_i + \frac{h}{2} (f(t_{i}, \fcn_{i}) + f(t_{i+1}, \fcn_{i+1})), \tag{trapesmetoden} \\
+        \fcn_{i + 1} & = \fcn_i + h f\biggparanth{\frac{t_{i+1} + t_i}{2}, \frac{\fcn_{i+1} + \fcn_i}{2}}, \tag{midtpunktmetoden}
+    \end{align}
+    og
+    \begin{equation} \tag{Hens metode}
+        \left\{
+            \begin{aligned}
+                \fcn^* & = \fcn_i + h f(t_i, \fcn_i), \\
+                \fcn_{i + 1} & = \fcn_i + \frac{h}{2} (f(t_{i}, \fcn_{i}) + f(t_{i+1}, \fcn^*)).
+            \end{aligned}
+            \right.
+        \end{equation}
 \end{defn}
+        
+Har det noe å si hvilken metode vi bruker? La oss sammenligne metodene på et testproblem.
 
-Har det noe å si hvilken metode vi bruker? La oss sammeligne metodene på et testproblem.
-
-\begin{ex}
+\begin{ex} \label{eks:testproblem_numerikk}
     Vi anvender metodene over til å løse initialverdiproblemet
     \begin{equation*}
         \left\{ 
@@ -488,16 +578,103 @@ Har det noe å si hvilken metode vi bruker? La oss sammeligne metodene på et te
             \end{aligned}
         \right.
     \end{equation*}
-    på intervallet $[0, 1]$.
-    Dette gir følgende løsning.
+    på intervallet $[0, 1]$, med steglengde $h = 0.25$. Resultatet vises i figuren under.
     \begin{center}
         \includegraphics[scale=0.6]{methods_test.png}
     \end{center}
+    Nå endrer vi på steglengden $h$, og ser hvordan feilen i forhold til den eksakte løsningen endrer seg. Den lokale feilen, altså differansen $\abs{\fcn(t_1) - \fcn_1}$ for første steg, er vist for de ulike metodene i følgende tabell.
+    \begin{center}
+        \begin{tabular}{c | c | c | c | c}
+            $h$ & Euler eksplisitt & Euler implisitt & Trapesmetoden & Heuns metode \\
+            \hline
+            $10^{-1}$ & $5.950e-03$ & $5.161e-03$ & $1.025e-04$ & $2.224e-04$ \\
+            $10^{-2}$ & $5.084e-05$ & $5.017e-05$ & $8.502e-08$ & $1.713e-07$ \\
+            $10^{-3}$ & $5.008e-07$ & $5.002e-07$ & $8.350e-11$ & $1.671e-10$ \\
+            $10^{-4}$ & $5.001e-09$ & $5.000e-09$ & $8.338e-14$ & $1.668e-13$
+        \end{tabular}
+    \end{center}
+    Her observerer vi at for Eulers eksplisitte og implisitte metode blir feilen omtrent hundre ganger mindre dersom vi gjør steglengden ti ganger mindre, mens for trapesmetoden og Heuns metode kan det se ut som om feilen blir tusen ganger mindre hver gang vi gjør steglengden ti ganger mindre.
 
-    Nå kan vi endre på steglengden $h$ for å undersøke hvor godt metodene fungerer.
-
+    Den globale feilen, altså feilen $\abs{\fcn(t_N) - \fcn_N}$ i siste steget, finner vi som gitt i tabellen under.
+    \begin{center}
+        \begin{tabular}{c | c | c | c | c}
+            $h$ & Euler eksplisitt & Euler implisitt & Trapesmetoden & Heuns metode \\
+            \hline
+            $10^{-1}$ & $2.144e-02$ & $1.954e-02$ & $3.790e-04$ & $8.237e-04$ \\
+            $10^{-2}$ & $1.866e-03$ & $1.850e-03$ & $3.128e-06$ & $6.303e-06$ \\
+            $10^{-3}$ & $1.842e-04$ & $1.840e-04$ & $3.072e-08$ & $6.148e-08$ \\
+            $10^{-4}$ & $1.840e-05$ & $1.840e-05$ & $3.069e-10$ & $6.133e-10$
+        \end{tabular}
+    \end{center}
+    Her ser vi at feiler minsker proporsjonalt med steglengden for eksplisitt og implisitt Euler, mens den minsker kvadratisk med steglengden for trapesmetoden og Heuns metode.
 \end{ex}
 
+
+\section*{Analyse av numeriske metoder}
+
+Målet er nå å forklare mønsteret vi observerte i tabellene fra Eksempel \ref{eks:testproblem_numerikk}. Til dette formål er hovedverktøyet vårt Taylorutviklingen
+\begin{equation} \label{eq:taylor}
+    \fcn(t + h) = \sum_{i=0}^n \frac{h^n}{n!}\fcn^{(n)}(t) = \fcn(t) + h \dot{\fcn}(t) + \frac{h^2}{2} \ddot{\fcn}(t) + \cdots
+\end{equation}
+av løsingen $\fcn(t)$. Merk at denne formelen er en antagelse vi må gjøre, siden vi ikke på forhånd vet at $\fcn(t)$ er en glatt funksjon og derfor kan utvlikles som en rekke i henhold til Taylors teorem. I praksis fungerer likevel dette bra.
+
+Vi utleder den lokale feilen i Eulers eksplisitte metode. Først antar vi at $\fcn_i = \fcn(t_i)$, altså at approksimasjonen er lik den eksakte løsningen i punktet $t_i$. Så ønsker vi å se på differansen mellom den eksakte løsningen og approksimasjonen i neste steg, altså
+\begin{equation*}
+    \varepsilon_i := \fcn(t_i + h) - \fcn_{t_{i+1}}.
+\end{equation*}
+Ved hjelp av rekkeutviklingen \eqref{eq:taylor} finner vi
+\begin{equation*}
+    \begin{aligned}
+        \varepsilon_i & = \fcn(t_i + h) - \fcn_{t_{i+1}} \\
+        & = \fcn(t_i) + h \dot{\fcn}(t_i) + \frac{h^2}{2} \ddot{\fcn}(t_i) + \bigo{h^3} - \fcn_i - h f(t_i, \fcn_i) \\
+        & = \fcn(t_i) - \fcn_i + h f(t_i, \fcn_i) - h f(\fcn_i, t_i) + \frac{h^2}{2} \ddot{\fcn}(t_i) + \bigo{h^3} \\
+        & = \frac{h^2}{2} \ddot{\fcn}(t_i) + \bigo{h^3}
+    \end{aligned}
+\end{equation*}
+der vi har brukt at $\fcn(t_i) = \fcn_i$ og at $\dot{\fcn}(t_i) = f(t_i, \fcn_i)$. For liten steglengde $h$ øker derfor feilen maksimalt som $h^2$ på dette ene steget, akkurat som observert i Eksempel \ref{eks:testproblem_numerikk}.
+
+Vi kan forvente å få et estimat på den globale feilen dersom vi ser på summen av de lokale feilene. Det gir
+\begin{equation*}
+    \mathcal{E} := \sum_{i = 0}^N \varepsilon_i \leq \sum_{i = 1}^N \bigabs{\frac{h^2}{2}\ddot{\fcn}(t_i)} \leq \frac{M h^2}{2} N = \bigo{h},
+\end{equation*}
+der vi har antatt at $\ddot{\fcn} \leq M$ på $[t_0, T]$ (to ganger kontinuerlig deriverbar). Dette er også i overensstemmelse med Eksempel \ref{eks:testproblem_numerikk}.
+
+Til slutt skal vi se på én fordel og én ulempe med implisitte metoder som kan være greit å vite om.
+
+\begin{ex}
+    Igjen ser vi på problemet
+    \begin{equation*}
+        \left\{ 
+            \begin{aligned}
+                & \dot{\fcn} = - \fcn, \\
+                & \fcn(0) = 1,
+            \end{aligned}
+        \right.
+    \end{equation*}
+    men denne gangen på intervallet $[0, 15]$. Euler eksplisitt og Euler implisitt på problemet, med steglengde $h = 3$, produserer følgende approksimasjoner til løsningen.
+    \begin{center}
+        \includegraphics[width=0.48\textwidth]{stability_test_explicit.png}
+        \includegraphics[width=0.48\textwidth]{stability_test_implicit.png}
+    \end{center}
+    Her kan man tydelig se at den implisitte metoden fungerer mye bedre enn den eksplisitte: den implisitte metoden virker å være mer stabil. Erfaring tilsier at implisitte metoder som regel er mye mer robuste når det kommer til stabilitet.
+\end{ex}
+
+\begin{ex}
+    Vi prøver oss på problemet
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            & \dot{\fcn} = \sin(\fcn), \\
+            & \fcn(0) = \frac{\pi}{4}.
+        \end{aligned}
+        \right.
+    \end{equation*}
+    Eulers implisitte metode med steglengde $h$ blir
+    \begin{equation*}
+        \fcn_{i + 1} = \fcn_i + h \sin(\fcn_{i+1}).
+    \end{equation*}
+    Men denne ligningen kan ikke løses eksplisitt for $\fcn_{i+1}$! Det betyr at for hvert steg må vi beregne $\fcn_{i+1}$ med en numerisk ligningsløser, som f.eks fikspunktiterasjon eller Newtons metode. Dette kan gjøre implisitte metoder mer tidkrevende enn eksplisitte metoder.
+\end{ex}
 
 
 \end{document}

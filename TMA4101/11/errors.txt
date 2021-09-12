@@ -1,0 +1,64 @@
+Local errors for partition 10
+ 
+Eksplisitt Euler: 5.950e-03
+Implisitt Euler: 5.161e-03
+Trapesmetoden: 1.025e-04
+Heuns metode: 2.224e-04
+
+ 
+Global errors for partition 10
+ 
+Eksplisitt Euler: 2.144e-02
+Implisitt Euler: 1.954e-02
+Trapesmetoden: 3.790e-04
+Heuns metode: 8.237e-04
+
+ 
+Local errors for partition 100
+ 
+Eksplisitt Euler: 5.084e-05
+Implisitt Euler: 5.017e-05
+Trapesmetoden: 8.502e-08
+Heuns metode: 1.713e-07
+
+ 
+Global errors for partition 100
+ 
+Eksplisitt Euler: 1.866e-03
+Implisitt Euler: 1.850e-03
+Trapesmetoden: 3.128e-06
+Heuns metode: 6.303e-06
+
+ 
+Local errors for partition 1000
+ 
+Eksplisitt Euler: 5.008e-07
+Implisitt Euler: 5.002e-07
+Trapesmetoden: 8.350e-11
+Heuns metode: 1.671e-10
+
+ 
+Global errors for partition 1000
+ 
+Eksplisitt Euler: 1.842e-04
+Implisitt Euler: 1.840e-04
+Trapesmetoden: 3.072e-08
+Heuns metode: 6.148e-08
+
+ 
+Local errors for partition 10000
+ 
+Eksplisitt Euler: 5.001e-09
+Implisitt Euler: 5.000e-09
+Trapesmetoden: 8.338e-14
+Heuns metode: 1.668e-13
+
+ 
+Global errors for partition 10000
+ 
+Eksplisitt Euler: 1.840e-05
+Implisitt Euler: 1.840e-05
+Trapesmetoden: 3.069e-10
+Heuns metode: 6.133e-10
+
+ 
