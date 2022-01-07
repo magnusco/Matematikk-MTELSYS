@@ -1,0 +1,157 @@
+% ------------------------------------
+% --------- Importering --------------
+% ------------------------------------
+
+\documentclass[a4paper,norsk,11pt]{style_interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+
+
+% ------------------------------------
+% ------------ Inputs ----------------
+% ------------------------------------
+
+% Overskrift
+\emnekode{TMA4121}
+\emnenavn{Matematikk 4 for MTELSYS}
+\title{Komplekse tall og funksjoner}
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+\def\LF{0}  % Set to 1 if LF is to be compiled
+
+
+
+% ------------------------------------
+% ----------- Seksjoner --------------
+% ------------------------------------
+
+% ----------------------
+% ------ Intro ---------
+% ----------------------
+%Introduksjon
+
+\section*{Oppgaver}
+%Tekst før oppg. 1
+
+% ----------------------
+% -------- 1 -----------
+% ----------------------
+\begin{oppgave}{1}
+(Kreyzig 13.2.1, 2, 4)
+
+Skriv følgende komplekse tall på polarform og skissér punktene i det komplekse plan:\\
+a) $z_1 = 1 +i$\\
+b) $z_2 = 2i$ og $-2i$\\
+c) $z_3 = -4$\\
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+%-------------------------
+%Tekst etter oppg. 1 / før oppg. 2
+
+% ----------------------
+% -------- 2 -----------
+% ----------------------
+\begin{oppgave}{2}
+(Kreyzig 13.2.9, 13)
+
+Beregn $|z_i|$ for følgende komplekse tall:\\
+a) $z_1 = 1 - i$\\
+b) $z_2 = (1- i)^{20}$\\
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+% ----------------------
+% -------- 3 -----------
+% ----------------------
+\begin{oppgave}{3}
+(Kreyzig 13.2.30)
+
+Betrakt følgende polynom: $p(z) = z^4 + 324$
+
+a) Finn røttene til $p(z)$\\
+b) Skissér røttene i det komplekse plan\\
+c) Faktorisér polynomet i kvadratiske ledd med reelle faktorer (du ender opp med et uttrykk på formen $(z^2+a_1)(z^2+a_2)$)\\
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+% ----------------------
+% -------- 4 -----------
+% ----------------------
+\begin{oppgave}{4}
+(Kreyzig 13.3.3, 6)
+
+Skissér følgende mengder i det komplekse plan:\\
+a) $\frac{\pi}{2} < | z - 1 + 2i | < \pi$\\
+b) $\mathrm{Re} (\frac{1}{z}) < 1$\\
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+
+
+\end{document}
