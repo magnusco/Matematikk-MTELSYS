@@ -1,0 +1,125 @@
+% ------------------------------------
+% --------- Importering --------------
+% ------------------------------------
+
+\documentclass[a4paper,norsk,11pt]{style_interaktiv}
+
+% Importerte pakker
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{ifluatex}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+\usetikzlibrary{arrows}
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+\ifluatex
+  \usepackage{fontspec}
+  \setmainfont{Calibri}
+  \usepackage{unicode-math}
+  \setmathfont{Cambria Math}
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{url}
+
+% Underfigurer
+\renewcommand{\thesubfigure}{(\arabic{subfigure})}
+
+
+
+% ------------------------------------
+% ------------ Inputs ----------------
+% ------------------------------------
+
+% Overskrift
+\emnekode{TMA4121}
+\emnenavn{Matematikk 4 for MTELSYS}
+\title{Komplekse funksjoner, intro}
+
+% Nye kommandoer
+\newcommand{\dee}{\mathop{}\!{d}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+\def\LF{0}  % Set to 1 if LF is to be compiled
+
+
+
+% ------------------------------------
+% ----------- Seksjoner --------------
+% ------------------------------------
+
+% Introduksjon
+% Tips for øvingen: Noen ganger er det praktisk å sette inn  komplekse tall på formen \\$z = x + y i,\ \ x,y \in \mathbb{R}$
+
+\section*{Oppgaver}
+
+\begin{oppgave}{1}
+(Kreyzig 13.3.10, 11)
+
+Finn $\mathrm{Re}(f(z_0))$ og $\mathrm{Im}(f(z_0))$ når:\\
+a) $f(z) = 5z^2 - 12z + 3 + 2i,\ z_0 = 4 - 3i$\\
+b) $f(z) = \frac{1}{1 + z},\ z_0 = 1 - i$
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+%-------------------------
+
+\begin{oppgave}{2}
+(Kreyzig 13.3.14, 16)
+
+Finn ut om $f(z)$ er kontinuerlig i $z = 0$ dersom $f(0) = 0$ for:\\
+a) $\mathrm{Re}(z^2) / |z| $\\
+b) $\mathrm{Im}(z^2) / |z|^2 $\\
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+%-------------------------
+
+\begin{oppgave}{3}
+(Kreyzig 13.3.18, 21)
+
+Finn $f'(z)$ og sett inn for $z_0$ når:\\
+a) $(z - i) / (z + i) ,\ z_0 = i$\\
+b) $i (1 - z)^n,\ z_0 = 0$\\
+
+\if\LF1
+\textbf{-----Intermanus-----}\\
+\textbf{OPPGAVETID: } x minutter\\
+Kommentarer til oppgaver, viktige momenter å få med, tips, etc.
+
+\textbf{FASIT: }\\
+Fasit
+\fi
+\end{oppgave}
+
+%-------------------------
+
+
+
+\end{document}
